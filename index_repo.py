@@ -1,6 +1,7 @@
 from langchain.document_loaders import DirectoryLoader
 
 def load_and_index_files(repo_path):
+    print("Loading documents from current repo")
     extensions = ['txt', 'md', 'markdown', 'py', 'js', 'java', 'c', 'cpp', 'cs', 'go', 'rb', 'php', 'scala', 'html', 'htm', 'xml', 'json', 'yaml', 'yml', 'ini', 'toml', 'cfg', 'conf', 'sh', 'bash', 'css', 'scss', 'sql', 'gitignore', 'dockerignore', 'editorconfig']
 
     file_type_counts = {}
