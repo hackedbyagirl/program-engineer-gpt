@@ -8,6 +8,7 @@ class CodeLoader:
     def __init__(self, repository):
         self.repository = repository
         self.code_files = []
+        self.extensions = ['txt', 'md', 'markdown', 'py', 'js', 'java', 'c', 'cpp', 'cs', 'go', 'rb', 'php', 'scala', 'html', 'htm', 'xml', 'json', 'yaml', 'yml', 'ini', 'toml', 'cfg', 'conf', 'sh', 'bash', 'css', 'scss', 'sql', 'gitignore', 'dockerignore', 'editorconfig']
 
     def load_repository(self):
         """
@@ -33,8 +34,9 @@ class CodeLoader:
         try:
             for dirpath, dirnames, filenames in os.walk(root_dir):
                 for file in filenames:
-                    loader = TextLoader(os.path.join(dirpath, file), encoding='utf-8')
-                    self.code_files.extend(loader.load_and_split())
+                    if file.split('.')[-1] in self.extensions:
+                        loader = TextLoader(os.path.join(dirpath, file))
+                        self.code_files.extend(loader.load())
 
         except Exception as e:
             raise Exception(f"Failed to load code files: {e}")

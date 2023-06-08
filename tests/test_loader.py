@@ -4,7 +4,15 @@ import os
 import pytest
 from src.core.loader import CodeLoader
 
-def test_load_repository_local():
+@pytest.fixture
+def cleanup():
+    # Setup: nothing to do
+    yield
+    # Teardown: remove the temp_repo directory if it exists
+    if os.path.exists("temp_repo"):
+        os.system("rm -rf temp_repo")
+
+def test_load_repository_local(cleanup):
     # Create a temporary directory with a Python file
     os.mkdir("temp_dir")
     with open("temp_dir/test.py", "w") as f:
@@ -15,20 +23,21 @@ def test_load_repository_local():
     loader.load_repository()
 
     # Check that the Python file was loaded
-    assert "temp_dir/test.py" in loader.get_code_files()
+    loaded_files = [doc.metadata['source'] for doc in loader.get_code_files()]
+    assert "temp_dir/test.py" in loaded_files
 
     # Clean up the temporary directory
     os.remove("temp_dir/test.py")
     os.rmdir("temp_dir")
 
-def test_load_repository_invalid():
+def test_load_repository_invalid(cleanup):
     # Try to load an invalid directory
     with pytest.raises(Exception) as e:
         loader = CodeLoader("invalid_dir")
         loader.load_repository()
     assert str(e.value) == "Invalid local directory: invalid_dir"
 
-def test_load_repository_github():
+def test_load_repository_github(cleanup):
     # Try to load a GitHub repository
     # Note: This test requires internet access and the repository to be public
     loader = CodeLoader("https://github.com/githubtraining/hellogitworld")
