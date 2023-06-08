@@ -22,6 +22,7 @@ class Config(object):
         cls.model = 'gpt-3.5-turbo'
         cls.question = None
         cls.chunk_size = 1000
+        cls.chunk_overlap = 0
         cls.embedded_size = 1536
 
 
