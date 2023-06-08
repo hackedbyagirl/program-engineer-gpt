@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import os
+
 class Config(object):
     ''' Stores configuration variables and functions for CodeAssistantGPT '''
     initialized = False
@@ -18,20 +20,26 @@ class Config(object):
 
         cls.verbose = 0
 
+        # Environmental Variable
+        cls.openai_key = None
+        cls.activeloop_key = None
+        cls.activeloop_username = None
+
+        # Arguments
         cls.repo = None
         cls.model = 'gpt-3.5-turbo'
         cls.question = None
         cls.chunk_size = 1000
         cls.chunk_overlap = 0
         cls.embedded_size = 1536
-
-
+        
         # Will overwrite provided args    
         cls.load_args()
+        cls.load_env
 
 ############################################
 
-     @classmethod
+    @classmethod
     def load_args(cls):
         ''' Sets configuration values based on Argument.args object '''
         from .args import Arguments
@@ -41,6 +49,21 @@ class Config(object):
         
         #get options
         cls.load_ops(args)
+
+    @classmethod
+    def load_env(cls):
+        ''' Gets Environmental Variables '''
+        from dotenv import load_dotenv
+
+        # Get Environmental Variable
+        load_dotenv()
+        
+        cls.openai_key = os.getenv('OPENAI_API_KEY')
+        cls.activeloop_key = os.getenv('ACTIVELOOP_TOKEN')
+        cls.activeloop_username = os.getenv('DEEPLAKE_ACCOUNT_NAME')
+
+
+
 
     @classmethod
     def exists(cls):

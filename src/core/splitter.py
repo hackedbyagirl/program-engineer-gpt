@@ -16,3 +16,7 @@ class CodeSplitter:
         text_splitter = CharacterTextSplitter(chunk_size=self.chunk_size, chunk_overlap=self.chunk_overlap)
         texts = text_splitter.split_documents(self.code_files)
 
+        print(f"{len(texts)}")
+
+        return texts
+

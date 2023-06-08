@@ -29,7 +29,7 @@ class CodeLoader:
             
             root_dir = self.repository
 
-        # Walk through the directory and find all Python files
+        # Walk through the directory load all repository files
         try:
             for dirpath, dirnames, filenames in os.walk(root_dir):
                 for file in filenames:
@@ -42,6 +42,8 @@ class CodeLoader:
         # If the repository was a GitHub repository, remove the cloned directory
         if "github.com/" in self.repository:
             os.system("rm -rf temp_repo")
+
+        print(f'{len(self.code_files)}')
 
     def get_code_files(self):
         """
