@@ -43,8 +43,9 @@ class CodeLoader:
 
         print(f'{len(self.code_files)}')
 
-    def get_code_files(self):
+    def get_code(self):
         """
         Return the list of loaded code files.
         """
+        self.load_repository()
         return self.code_files

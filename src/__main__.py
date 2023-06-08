@@ -25,7 +25,7 @@ class CodeAssistantGPT(object):
         self.load_code()
 
     def load_code(self):
-        CodeLoader.load_repository(Config.repo)
+        files = CodeLoader.get_code(Config.repo)
 
 ########################################################################
 def run():
