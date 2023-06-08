@@ -2,7 +2,7 @@
 
 import os
 import pytest
-from src.code_loader import CodeLoader
+from src.core.loader import CodeLoader
 
 def test_load_repository_local():
     # Create a temporary directory with a Python file

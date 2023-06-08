@@ -39,10 +39,6 @@ class CodeLoader:
         except Exception as e:
             raise Exception(f"Failed to load code files: {e}")
 
-        # If the repository was a GitHub repository, remove the cloned directory
-        if "github.com/" in self.repository:
-            os.system("rm -rf temp_repo")
-
         print(f'{len(self.code_files)}')
 
     def get_code_files(self):
