@@ -9,7 +9,11 @@ from .core.analyzer import AnalyzeCode
 
 class CodeAssistantGPT(object):
     def __init__(self):
-        Color.print("{R}Setting up required configurations...\n")
+        from .utils.banner import banner
+
+        banner()
+
+        Color.print("{P}Setting up required configurations...\n")
         Config.init()
 
     def launch(self):

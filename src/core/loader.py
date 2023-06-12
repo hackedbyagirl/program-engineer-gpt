@@ -16,7 +16,7 @@ class CodeLoader:
         """
         Load all Python files from the specified repository.
         """
-        if "github.com/" in self.repository:
+        if "github.com/" in self.repository or "gitlab.com/" in self.repository:
             # If the repository is a GitHub repository, clone it locally first
             try:
                 os.system(f"git clone {self.repository} temp_repo")
