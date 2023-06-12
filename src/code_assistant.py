@@ -26,10 +26,11 @@ class CodeAssistantGPT(object):
 
     def analyze_code(self):
         analyzer = AnalyzeCode(Config.activeloop_username, Config.dataset, Config.model)
+        Color.print("{G}Please enter your question (or 'exit' to stop): ")
         while True:
-            Color.print("{G}Please enter your question (or 'exit' to stop): ")
+            Color.print("{G}Question: ")
             question = input()
             if question.lower() == 'exit':
                 break
             answer = analyzer.ask_question(question)
-            print(answer)
+            Color.print("{B}Answer: {W}" + answer)
