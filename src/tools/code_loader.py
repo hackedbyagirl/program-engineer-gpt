@@ -28,8 +28,8 @@ class CodeLoaderTool(BaseTool):
         code_chunks = loader.load_repository()
 
         # Embed the Code and Upload to DataLake VectorStore
-        embed = CodeEmbedder(dataset_name, deeplake_username, code_chunks)
-        embed.embed_code()
+        embed = CodeEmbedder(dataset_name, deeplake_username)
+        embed.embed_and_upload(code_chunks)
 
         # For the sake of this example, we will just return a dummy string
         return f"Code loading for repository '{repository}' completed successfully." 

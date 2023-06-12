@@ -12,14 +12,14 @@ class CodeEmbedder:
         self.index_name = index_name
         self.username = username
 
-    def embed_code(self):
+    def embed_and_upload(self, code_chunks):
         """
-        Embed the code chunks using OpenAI Embeddings.
+        Embed the code chunks using OpenAI Embeddings and Upload to DeepLake.
         """
         Color.print("{G}Step 4: {W}Embedding and Uploading files to Deeplake Index")
         embeddings = OpenAIEmbeddings()
         db = DeepLake.from_documents(
-            documents=self.code_chunks,
+            documents=code_chunks,
             dataset_path=f"hub://{self.username}/{self.index_name}",
             embedding=embeddings,
             overwrite=True,

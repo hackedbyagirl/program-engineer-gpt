@@ -11,6 +11,7 @@ from langchain.vectorstores import DeepLake
 # Define the input schema for the tool
 class CodeWritingInput(BaseModel):
     task: str = Field(description="The code task to generate code for")
+    username: str = Field(description="The username of the DeepLake account.")
     dataset_path: str = Field(description="The path to the dataset in DeepLake")
 
 class CodeWriterTool(BaseTool):
@@ -18,7 +19,7 @@ class CodeWriterTool(BaseTool):
     description = "Generates code based on a provided task"
     args_schema: Type[BaseModel] = CodeWritingInput
 
-    def _run(self, task: str, dataset_path: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> str:
+    def _run(self, task: str, username: str, dataset_path: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> str:
         """Use the tool."""
         # Initialize the OpenAI API with your API key
         openai = OpenAI(api_key="your-api-key")
