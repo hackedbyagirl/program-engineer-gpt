@@ -4,6 +4,9 @@ from langchain.text_splitter import CharacterTextSplitter
 
 
 class CodeSplitter:
+    '''
+    Splits and chunks code
+    '''
     def __init__(self, code_files):
         self.code_files = code_files
         self.chunk_size = 1000  # Config.chunk_size
