@@ -34,7 +34,7 @@ class Config(object):
         cls.embedded_size = 1536
         
         # Will overwrite provided args    
-        #cls.load_args()
+        cls.load_args()
         cls.load_env()
 
 ############################################

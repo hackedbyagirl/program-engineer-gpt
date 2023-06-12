@@ -24,6 +24,10 @@ class CodeLoader:
             except Exception as e:
                 raise Exception(f"Failed to clone GitHub repository: {e}")
         
+        elif self.repository == '.':
+            # If the repository is '.', use the current directory
+            root_dir = os.getcwd()    
+        
         else:
             # If the repository is a local directory, use it directly
             if not os.path.isdir(self.repository):

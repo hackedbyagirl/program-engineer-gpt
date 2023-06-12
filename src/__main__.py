@@ -6,6 +6,7 @@ from .config import Config
 from .utils.colors import Color
 from .core.loader import CodeLoader
 from src import __app_name__
+from src.code_assistant import CodeAssistantGPT
 
 try:
     from .config import Config
@@ -14,18 +15,6 @@ except (ValueError, ImportError) as e:
         "You may need to run this from the root directory (which includes README.md)",
         e,
     )
-
-class CodeAssistantGPT(object):
-    def __init__(self):
-        Config.init()
-
-        Color.print("{R}Setting up required configurations...\n")
-
-    def launch(self):
-        self.load_code()
-
-    def load_code(self):
-        files = CodeLoader.get_code(Config.repo)
 
 ########################################################################
 def run():
