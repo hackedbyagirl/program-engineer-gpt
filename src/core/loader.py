@@ -4,6 +4,7 @@ import os
 
 from langchain.document_loaders import TextLoader
 from .splitter import CodeSplitter
+from ..utils.colors import Color
 
 class CodeLoader:
     def __init__(self, repository):
@@ -19,18 +20,21 @@ class CodeLoader:
         if "github.com/" in self.repository or "gitlab.com/" in self.repository:
             # If the repository is a GitHub repository, clone it locally first
             try:
-                os.system(f"git clone {self.repository} temp_repo")
+                Color.print('{G}Step 1: {W}Retrieving Code from Online Repository')
+                os.system(f"git clone --quiet {self.repository} temp_repo")
                 root_dir = "temp_repo"
             
             except Exception as e:
                 raise Exception(f"Failed to clone GitHub repository: {e}")
         
         elif self.repository == '.':
-            # If the repository is '.', use the current directory
+            # Get code from current directory
+            Color.print('{G}Step 1: {W}Retrieving Code from Current Directory')
             root_dir = os.getcwd()    
         
         else:
-            # If the repository is a local directory, use it directly
+            # Get code from provided directory
+            Color.print('{G}Step 1: {W}Retrieving Code from: {GR}' + self.repository)
             if not os.path.isdir(self.repository):
                 raise Exception(f"Invalid local directory: {self.repository}")
             
@@ -38,6 +42,7 @@ class CodeLoader:
 
         # Walk through the directory load all repository files
         try:
+            Color.print('{G}Step 2: {W}Loading Code for Indexing and Embedding')
             for dirpath, dirnames, filenames in os.walk(root_dir):
                 for file in filenames:
                     if file.split('.')[-1] in self.extensions:
@@ -46,9 +51,11 @@ class CodeLoader:
 
         except Exception as e:
             raise Exception(f"Failed to load code files: {e}")
-
-        print(f'Number of Loaded Files: {len(self.code_files)}')
-        print('Splitting files...')
+        
+        len_files = str(len(self.code_files))
+        Color.print('{Y}Number of Loaded Files: {W}' + len_files)
+        
+        Color.print('{G}Step 3: {W}Splitting and Chunking Files')
         self.split_code()
         return self.chunks
 
