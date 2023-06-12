@@ -76,7 +76,7 @@ class CodeLoader:
         # Walk through the directory load all repository files
         try:
             Color.print("{G}Step 2: {W}Loading Code for Indexing and Embedding")
-            for dirpath, filenames in os.walk(root_dir):
+            for dirpath, dirnames, filenames in os.walk(root_dir):
                 for file in filenames:
                     if file.split(".")[-1] in self.extensions:
                         loader = TextLoader(os.path.join(dirpath, file))
