@@ -26,9 +26,11 @@ class Config(object):
         cls.activeloop_username = None
 
         # Arguments
+        cls.module = None
         cls.repo = None
-        cls.model = 'gpt-3.5-turbo'
-        cls.question = None
+        cls.index_name = None
+        cls.dataset = None
+        cls.model = 'gpt-4'
         cls.chunk_size = 1000
         cls.chunk_overlap = 0
         cls.embedded_size = 1536
@@ -52,11 +54,16 @@ class Config(object):
     @classmethod
     def load_ops(cls, args):
         ''' Sets configuration values based on parsed command-line arguments '''
-        cls.repo = args.repository if args.repository else cls.repo
-        cls.model = args.model if args.model else cls.model
-        cls.question = args.question if args.question else cls.question
-        cls.chunk_size = args.chunk_size if args.chunk_size else cls.chunk_size
-        cls.embedded_size = args.embedding_size if args.embedding_size else cls.embedded_size    
+        cls.module = args.module
+
+        if args.module == 'load':
+            cls.repo = args.repository if args.repository else cls.repo
+            cls.index_name = args.index if args.index else cls.index_name
+            cls.chunk_size = args.chunk_size if args.chunk_size else cls.chunk_size
+            cls.embedded_size = args.embedding_size if args.embedding_size else cls.embedded_size
+        elif args.module == 'analyze':
+            cls.dataset = args.dataset if args.dataset else cls.dataset
+            cls.model = args.model if args.model else cls.model
 
     @classmethod
     def load_env(cls):
@@ -71,12 +78,6 @@ class Config(object):
         cls.activeloop_username = os.getenv('DEEPLAKE_ACCOUNT_NAME')
 
     @classmethod
-    def exists(cls):
-        from .utils.cmds import Command
-        return Command.program_exists(cls.dep_name)
-
-
-    @classmethod
     def exit(cls, code=0):
         print('Stopping program')
 
@@ -85,4 +86,4 @@ class Config(object):
 ###############################################################
 
 if __name__ == '__main__':
-    Config.init(False)
+    Config.init()

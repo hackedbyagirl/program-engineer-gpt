@@ -19,46 +19,56 @@ class Arguments(object):
 
     def get_arguments(self):
         ''' Returns parser.args() containing all program arguments '''
-        
+
         parser = argparse.ArgumentParser(description="CodeAssistantGPT: Explore and ask questions about a GitHub code repository or local code repository using OpenAI's GPT language model.")
 
-        parser.add_argument(
+        # Subparser
+        subparsers = parser.add_subparsers(dest='module', help="Choose a module to run")
+
+        # Subparser for Load Module
+        load_parser = subparsers.add_parser('load', help='Load a repository for embedding and question answering')
+        load_parser.add_argument(
             "--repository",
             type=str,
             required=True,
             help="The URL of the GitHub repository or the path of the local repository to analyze.",
         )
-
-        parser.add_argument(
-            "--question",
+        load_parser.add_argument(
+            "--index",
             type=str,
             required=True,
-            help="The question to ask about the repository.",
+            help="The name of the Index you want the code to be stored at",
         )
-
-        parser.add_argument(
-            "--model",
-            type=str,
-            default="gpt-3.5-turbo",
-            help="The name of the GPT model to use for answering questions. Default is 'gpt-3.5-turbo'.",
-        )
-
-        parser.add_argument(
+        load_parser.add_argument(
             "--chunk_size",
             type=int,
             default=1000,
             help="The size of the chunks to split the code into for analysis. Default is 1000.",
         )
-
-        parser.add_argument(
+        load_parser.add_argument(
             "--embedding_size",
             type=int,
             default=1536,
             help="The size of the embeddings to use for semantic analysis. Default is 1536.",
         )
 
+        # Subparser for Analyze Module
+        analyze_parser = subparsers.add_parser('analyze', help='Analyze the embedded code and answer questions')
+        analyze_parser.add_argument(
+            "--dataset",
+            type=str,
+            required=True,
+            help="The name of your dataset index.",
+        )
+        analyze_parser.add_argument(
+            "--model",
+            type=str,
+            default="gpt-3.5-turbo",
+            help="The name of the GPT model to use for answering questions. Default is 'gpt-3.5-turbo'.",
+        )
+
         return parser.parse_args()
-    
+
 if __name__ == '__main__':
     from .utils.colors import Color
     from .config import Config
