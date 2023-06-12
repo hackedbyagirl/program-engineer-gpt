@@ -29,6 +29,9 @@ class CodeEmbedder:
         Color.print("{Y}To analyze this data, please run the following command:\n")
         Color.print("{GR}python3 ca_gpt.py analyze --dataset " + self.index_name)
 
+    def get_all_embeddings(self):
+        pass
+    
     def remove_temp_dir(self):
         """
         Remove 'temp_repo' if a repository was cloned
