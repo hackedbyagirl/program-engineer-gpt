@@ -2,8 +2,6 @@
 
 from langchain.text_splitter import CharacterTextSplitter
 
-# from ..config import Config
-
 
 class CodeSplitter:
     def __init__(self, code_files):
