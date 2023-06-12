@@ -4,8 +4,6 @@ from langchain.vectorstores import DeepLake
 from langchain.embeddings.openai import OpenAIEmbeddings
 from ..config import Config
 
-
-
 class CodeEmbedder:
     def __init__(self, code_chunks):
         self.code_chunks = code_chunks
@@ -17,5 +15,5 @@ class CodeEmbedder:
         Embed the code chunks using OpenAI Embeddings.
         """
         embeddings = OpenAIEmbeddings()
-        db = DeepLake.from_documents(dataset_path=f"hub://{self.username}/langchain-code", embedding_function=embeddings, public=False))
+        db = DeepLake.from_documents(dataset_path=f"hub://{self.username}/langchain-code", embedding_function=embeddings, public=False)
         db.add_documents(self.code_chunks)
