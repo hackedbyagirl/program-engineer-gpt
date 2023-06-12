@@ -6,7 +6,7 @@ from langchain.vectorstores import DeepLake
 from langchain.embeddings.openai import OpenAIEmbeddings
 
 class AnalyzeCode:
-    def __init__(self, username, dataset_name, model_name='gpt-3.5-turbo'):
+    def __init__(self, username, dataset_name, model_name):
         self.username = username
         self.dataset_path = f"hub://{self.username}/{dataset_name}"
         self.model_name = model_name
