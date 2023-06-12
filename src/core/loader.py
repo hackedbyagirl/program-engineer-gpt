@@ -67,7 +67,7 @@ class CodeLoader:
 
         else:
             # Get code from provided directory
-            Color.print("{G}Step 1: {W}Retrieving Code from: {GR}" + self.repository)
+            Color.print("{G}Step 1: {W}Retrieving Code from Local Repository")
             if not os.path.isdir(self.repository):
                 raise Exception(f"Invalid local directory: {self.repository}")
 
