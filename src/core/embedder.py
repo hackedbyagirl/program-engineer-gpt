@@ -15,5 +15,5 @@ class CodeEmbedder:
         Embed the code chunks using OpenAI Embeddings.
         """
         embeddings = OpenAIEmbeddings()
-        db = DeepLake.from_documents(dataset_path=f"hub://{self.username}/langchain-code", embedding_function=embeddings, public=False)
-        db.add_documents(self.code_chunks)
+        db = DeepLake.from_documents(documents=self.code_chunks, dataset_path=f"hub://{self.username}/langchain-code", embedding=embeddings, overwrite=True, public=False)
+       

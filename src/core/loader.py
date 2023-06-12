@@ -9,6 +9,7 @@ class CodeLoader:
     def __init__(self, repository):
         self.repository = repository
         self.code_files = []
+        self.chunks = []
         self.extensions = ['txt', 'md', 'markdown', 'py', 'js', 'java', 'c', 'cpp', 'cs', 'go', 'rb', 'php', 'scala', 'html', 'htm', 'xml', 'json', 'yaml', 'yml', 'ini', 'toml', 'cfg', 'conf', 'sh', 'bash', 'css', 'scss', 'sql', 'gitignore', 'dockerignore', 'editorconfig']
 
     def load_repository(self):
@@ -46,12 +47,14 @@ class CodeLoader:
         except Exception as e:
             raise Exception(f"Failed to load code files: {e}")
 
-        print(f'{len(self.code_files)}')
+        print(f'Number of Loaded Files: {len(self.code_files)}')
+        print('Splitting files...')
+        self.split_code()
+        return self.chunks
 
     def split_code(self):
         """
         Return the list of loaded code files in a split and chunked format.
         """
         splitter = CodeSplitter(self.code_files)
-        code_chunks = splitter.split_code()
-        return code_chunks
+        self.chunks = splitter.split_code()
