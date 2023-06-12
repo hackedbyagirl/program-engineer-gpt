@@ -13,36 +13,37 @@ To achieve this, the tool follows a systematic process. Firstly, it loads and th
 TBD
 
 ## Installation
-TBD
+```
+python3 -m pip install -r requirements.txt
+```
 
 ## Usage
 To use CodeAssistantGPT, there are two modules, `load` and `analyze`. The `load` module takes a code repository and creates an index that can be used to for further analysis. The `analyze` module allows you to ask question about any codebase that you have indexed. 
 
-#### Load Module:
+### Load Module:
 Load a codebase repository from githuib or a local repository.
 
+**Example**:
+```
+python3 ca_gpt.py load --repository <repository_url> --index <index_name>
+```
 **Arguments**:
 * `--repository`: This argument specifies the URL of the GitHub repository or the path of the local repository to analyze.
 * `--index`: This argument specifies the name of the Index you want the code to be stored at.
 * `--chunk_size`: This argument specifies the size of the chunks to split the code into for analysis. The default value is 1000.
 * `--embedding_size`: This argument specifies the size of the embeddings to use for semantic analysis. The default value is 1536.
 
-**Example**:
-```
-python3 load --repository <repository_url> --index <index_name>
-```
-
-#### Analyze Module:
+### Analyze Module:
 Have a conversation with your code uploaded to the Deeplake Index
 
+**Example**:
+```
+python3 ca_gpt.py analyze --dataset <dataset_name>
+```
 **Arguments**:
 * `--dataset`: This argument specifies the name of your dataset index.
 * `--model`: This argument specifies the name of the GPT model to use for answering questions. The default value is 'gpt-3.5-turbo'.
 
-**Example**:
-```
-python3 -m src analyze --dataset <dataset_name>
-```
 
 ## Documentation
 For more detailed information about the API, please see documentation located in the `docs` directory.
