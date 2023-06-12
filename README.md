@@ -10,7 +10,8 @@ To achieve this, the tool follows a systematic process. Firstly, it loads and th
 * Use OpenAI's GPT language model to answer questions about the code.
 
 ## Requirements
-TBD
+- [Deeplake Account](https://app.activeloop.ai/register/)
+- [OpenAI Account](https://openai.com/)
 
 ## Installation
 ```
@@ -18,6 +19,8 @@ python3 -m pip install -r requirements.txt
 ```
 
 ## Usage
+First, change the `test.env` to `.env` and add the required environmental variables.
+
 To use CodeAssistantGPT, there are two modules, `load` and `analyze`. The `load` module takes a code repository and creates an index that can be used to for further analysis. The `analyze` module allows you to ask question about any codebase that you have indexed. 
 
 ### Load Module:
