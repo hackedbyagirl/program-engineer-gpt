@@ -7,6 +7,7 @@ from .core.loader import CodeLoader
 from .core.embedder import CodeEmbedder
 from .core.analyzer import AnalyzeCode
 
+
 class CodeAssistantGPT(object):
     def __init__(self):
         from .utils.banner import banner
@@ -17,9 +18,9 @@ class CodeAssistantGPT(object):
         Config.init()
 
     def launch(self):
-        if Config.module == 'load':
+        if Config.module == "load":
             self.load_code()
-        elif Config.module == 'analyze':
+        elif Config.module == "analyze":
             self.analyze_code()
 
     def load_code(self):
@@ -34,7 +35,7 @@ class CodeAssistantGPT(object):
         while True:
             Color.print("{G}Question: ")
             question = input()
-            if question.lower() == 'exit':
+            if question.lower() == "exit":
                 break
             answer = analyzer.ask_question(question)
             Color.print("{B}Answer: {W}" + answer)
