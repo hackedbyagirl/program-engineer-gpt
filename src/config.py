@@ -45,10 +45,19 @@ class Config(object):
         from .args import Arguments
         
         args = Arguments(cls).args
-        cls.module = args.module
-        
+               
         #get options
         cls.load_ops(args)
+
+    @classmethod
+    def load_ops(cls, args):
+        ''' Sets configuration values based on parsed command-line arguments '''
+        cls.repo = args.repository if args.repository else cls.repo
+        cls.model = args.model if args.model else cls.model
+        cls.question = args.question if args.question else cls.question
+        cls.chunk_size = args.chunk_size if args.chunk_size else cls.chunk_size
+        cls.chunk_overlap = args.chunk_overlap if args.chunk_overlap else cls.chunk_overlap
+        cls.embedded_size = args.embedded_size if args.embedded_size else cls.embedded_size    
 
     @classmethod
     def load_env(cls):
