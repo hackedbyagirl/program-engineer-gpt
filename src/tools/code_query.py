@@ -9,7 +9,7 @@ from pydantic import BaseModel, Field
 # Define the input schema for the tool
 class RepoAnalysisInput(BaseModel):
     repo_url: Optional[str] = Field(None, description="URL of the repository to analyze")
-    current_directory: Optional[bool] = Field(None, description="Whether to analyze the current directory")
+    current_directory: Optional[bool] = Field(None, description="Analyze code from the current directory")
     repo_path: Optional[str] = Field(None, description="Path to the local repository to analyze")
 
 class RepoAnalyzerTool(BaseTool):
