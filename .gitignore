@@ -25,4 +25,4 @@ share/python-wheels/
 MANIFEST
 
 ## ENV Variables
-.env
+*.env
