@@ -6,6 +6,9 @@ from langchain.vectorstores import DeepLake
 from langchain.embeddings.openai import OpenAIEmbeddings
 
 class AnalyzeCode:
+    '''
+    Analyze code
+    '''
     def __init__(self, username, dataset_name, model_name):
         self.username = username
         self.dataset_path = f"hub://{self.username}/{dataset_name}"
@@ -22,6 +25,9 @@ class AnalyzeCode:
         self.chat_history = []
 
     def ask_question(self, question):
+        '''
+        Ask Questions about your code
+        '''
         result = self.qa({"question": question, "chat_history": self.chat_history})
         self.chat_history.append((question, result['answer']))
         return result['answer']
