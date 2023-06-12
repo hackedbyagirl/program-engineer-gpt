@@ -3,6 +3,7 @@
 import os
 
 from langchain.document_loaders import TextLoader
+from .splitter import CodeSplitter
 
 class CodeLoader:
     def __init__(self, repository):
@@ -43,9 +44,10 @@ class CodeLoader:
 
         print(f'{len(self.code_files)}')
 
-    def get_code(self):
+    def split_code(self):
         """
-        Return the list of loaded code files.
+        Return the list of loaded code files in a split and chunked format.
         """
-        self.load_repository()
-        return self.code_files
+        splitter = CodeSplitter(self.code_files)
+        code_chunks = splitter.split_code()
+        return code_chunks

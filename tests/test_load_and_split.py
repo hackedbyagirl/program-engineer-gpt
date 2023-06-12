@@ -23,7 +23,7 @@ def test_load_repository_local(cleanup):
     loader.load_repository()
 
     # Check that the Python file was loaded
-    loaded_files = [doc.metadata['source'] for doc in loader.get_code_files()]
+    loaded_files = [doc.metadata['source'] for doc in loader.split_code()]
     assert "temp_dir/test.py" in loaded_files
 
     # Clean up the temporary directory
@@ -44,4 +44,4 @@ def test_load_repository_github(cleanup):
     loader.load_repository()
 
     # Check that at least one file was loaded
-    assert len(loader.get_code_files()) > 0
+    assert len(loader.split_code()) > 0

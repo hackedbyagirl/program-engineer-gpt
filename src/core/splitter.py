@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
 from langchain.text_splitter import CharacterTextSplitter
-from ..config import Config
+#from ..config import Config
 
 class CodeSplitter:
     def __init__(self, code_files):
         self.code_files = code_files
-        self.chunk_size = Config.chunk_size
-        self.chunk_overlap = Config.chunk_overlap
+        self.chunk_size = 1000 #Config.chunk_size
+        self.chunk_overlap = 0 #Config.chunk_overlap
 
     def split_code(self):
         """

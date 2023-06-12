@@ -62,9 +62,6 @@ class Config(object):
         cls.activeloop_key = os.getenv('ACTIVELOOP_TOKEN')
         cls.activeloop_username = os.getenv('DEEPLAKE_ACCOUNT_NAME')
 
-
-
-
     @classmethod
     def exists(cls):
         from .utils.cmds import Command
