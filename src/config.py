@@ -56,8 +56,7 @@ class Config(object):
         cls.model = args.model if args.model else cls.model
         cls.question = args.question if args.question else cls.question
         cls.chunk_size = args.chunk_size if args.chunk_size else cls.chunk_size
-        cls.chunk_overlap = args.chunk_overlap if args.chunk_overlap else cls.chunk_overlap
-        cls.embedded_size = args.embedded_size if args.embedded_size else cls.embedded_size    
+        cls.embedded_size = args.embedding_size if args.embedding_size else cls.embedded_size    
 
     @classmethod
     def load_env(cls):

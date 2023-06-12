@@ -16,4 +16,6 @@ class CodeAssistantGPT(object):
         self.load_code()
 
     def load_code(self):
-        files = CodeLoader.get_code(Config.repo)
+        loader = CodeLoader(Config.repo)
+        loader.load_repository()
+        
