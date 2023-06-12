@@ -57,8 +57,8 @@ class CodeLoader:
                 os.system(f"git clone --quiet {self.repository} temp_repo")
                 root_dir = "temp_repo"
 
-            except Exception as e:
-                raise Exception(f"Failed to clone GitHub repository: {e}")
+            except Exception as error:
+                raise Exception(f"Failed to clone GitHub repository: {error}")
 
         elif self.repository == ".":
             # Get code from current directory
@@ -76,14 +76,14 @@ class CodeLoader:
         # Walk through the directory load all repository files
         try:
             Color.print("{G}Step 2: {W}Loading Code for Indexing and Embedding")
-            for dirpath, dirnames, filenames in os.walk(root_dir):
+            for dirpath, filenames in os.walk(root_dir):
                 for file in filenames:
                     if file.split(".")[-1] in self.extensions:
                         loader = TextLoader(os.path.join(dirpath, file))
                         self.code_files.extend(loader.load())
 
-        except Exception as e:
-            raise Exception(f"Failed to load code files: {e}")
+        except Exception as error:
+            raise Exception(f"Failed to load code files: {error}")
 
         len_files = str(len(self.code_files))
         Color.print("{Y}Number of Loaded Files: {W}" + len_files)
