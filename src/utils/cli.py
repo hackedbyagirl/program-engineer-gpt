@@ -157,34 +157,13 @@ class CLI(object):
         analyzer.interact()
 
 
-    def retrieve_existing(chunks):
-        '''
-        Handles required parameters for creating a code index
-        '''
-        # Check for the ActiveLoop API key
-        #if not os.getenv('ACTIVELOOP_TOKEN'):
-        #    print("ActiveLoop API key not found. Please add it as an environment variable or to the .env file.")
-        #    return
-
-        # Prompt the user for their DeepLake username and hub name
-        deeplake_info = questionary.prompt([
-            {
-                'type': 'text',
-                'name': 'username',
-                'message': "Please enter your DeepLake username: ",
-            },
-            {
-                'type': 'text',
-                'name': 'hub_name',
-                'message': "Please enter the name of your DeepLake hub: ",
-            }
-        ])
-
-        username = deeplake_info['username']
-        hub_name = deeplake_info['hub_name']
-
-
+    def retrieve_existing(self, chunks):
+        pass
+        
 class URLValidator(Validator):
+    '''
+    Validate URL for Input
+    '''
     def validate(self, document):
         url_pattern = re.compile(
             r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
