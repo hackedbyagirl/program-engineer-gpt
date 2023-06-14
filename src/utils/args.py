@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse, sys
-from .utils.colors import Color
+from .colors import Color
 
 class Arguments(object):
     ''' Holds arguments used by CodeAssistantGPT '''

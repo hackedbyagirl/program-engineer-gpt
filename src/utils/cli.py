@@ -82,7 +82,7 @@ class CLI(object):
             self.handle_cwd()
 
         elif method == "Deeplake repo index":
-            self.handle_deep_lake() 
+            self.handle_existing()
 
     def handle_url(self):
         '''
@@ -109,8 +109,7 @@ class CLI(object):
             ).ask()
         loader = CodeLoader()
         code_chunks = loader.load_directory(dir_path)
-        self.embed_new(code_chunks)
-        
+        self.embed_new(code_chunks)     
     
     def handle_cwd(self):
         '''
@@ -121,8 +120,35 @@ class CLI(object):
         self.embed_new(code_chunks)
 
     def handle_existing(self):
-        pass
+        '''
+        Handles and loads existing code index from deeplake
+        '''
+        # Check for the ActiveLoop API key
+        #if not os.getenv('ACTIVELOOP_TOKEN'):
+        #    print("ActiveLoop API key not found. Please add it as an environment variable or to the .env file.")
+        #    return
 
+        # Prompt the user for their DeepLake username and hub name
+        deeplake_info = questionary.prompt([
+            {
+                'type': 'text',
+                'name': 'username',
+                'message': "Please enter your DeepLake username: ",
+            },
+            {
+                'type': 'text',
+                'name': 'hub_name',
+                'message': "Please enter the name of your DeepLake Index you'd like to load: ",
+            }
+            ],
+            style=custom_style
+        )
+
+        username = deeplake_info['username']
+        hub_name = deeplake_info['hub_name']
+        analyzer = AnalyzeCode(username, hub_name)
+        analyzer.interact()
+        
     def embed_new(self, chunks):
         '''
         Handles required parameters for creating a code index
@@ -156,9 +182,8 @@ class CLI(object):
         analyzer = AnalyzeCode(username, hub_name)
         analyzer.interact()
 
+        
 
-    def retrieve_existing(self, chunks):
-        pass
         
 class URLValidator(Validator):
     '''
