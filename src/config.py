@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
+# Imports
 import os
+from dotenv import load_dotenv
+from .utils.args import Arguments
 
 class Config(object):
     ''' Stores configuration variables and functions for CodeAssistantGPT '''
@@ -40,8 +43,6 @@ class Config(object):
     @classmethod
     def load_args(cls):
         ''' Sets configuration values based on Argument.args object '''
-        from .args import Arguments
-        
         args = Arguments(cls).args
                
         #get arguments
@@ -52,7 +53,6 @@ class Config(object):
     @classmethod
     def load_env(cls):
         ''' Gets Environmental Variables '''
-        from dotenv import load_dotenv
 
         # Get Environmental Variable
         load_dotenv()
