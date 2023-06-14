@@ -5,16 +5,17 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.vectorstores import DeepLake
 from langchain.embeddings.openai import OpenAIEmbeddings
 
+from ..config import Config
 from ..utils.colors import Color
 
 class AnalyzeCode:
     '''
     Analyze code
     '''
-    def __init__(self, username, dataset_name, model_name="gpt-3.5-turbo"):
+    def __init__(self, username, dataset_name):
         self.username = username
         self.dataset_path = f"hub://{self.username}/{dataset_name}"
-        self.model_name = model_name
+        self.model_name = Config.model
         self.embeddings = OpenAIEmbeddings()
         self.db = DeepLake(dataset_path=self.dataset_path, read_only=True, embedding_function=self.embeddings)
         self.retriever = self.db.as_retriever()
