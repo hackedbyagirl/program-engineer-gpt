@@ -16,8 +16,9 @@ class Color(object):
         "B": 4,
         "P": 141,
         "C": 81,
-        "GR": 245,
+        "X": 245, # Gray
         "Y": 226,
+        "L": 121, # Light Green
     }
 
     @staticmethod
@@ -63,3 +64,11 @@ class Color(object):
     def color(text, code):
         colored_text = stylize(text, fg(code))
         return colored_text
+
+    @staticmethod
+    def p_error(error):
+        '''Prints an exception. Includes stack trace if necessary.'''
+        error_style = fg(1) + attr(1)
+        msg_style = fg(15) + attr(0)
+        error_message = f"{stylize('Error:', error_style)} {stylize(str(error), msg_style)}"
+        print(error_message)

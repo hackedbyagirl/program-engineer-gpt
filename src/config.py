@@ -26,11 +26,7 @@ class Config(object):
         cls.activeloop_username = None
 
         # Arguments
-        cls.module = None
-        cls.repo = None
-        cls.index_name = None
-        cls.dataset = None
-        cls.model = 'gpt-4'
+        cls.model = 'gpt-3.5-turbo-16k' #gpt-4 if you have the access
         cls.chunk_size = 1000
         cls.chunk_overlap = 0
         cls.embedded_size = 1536
