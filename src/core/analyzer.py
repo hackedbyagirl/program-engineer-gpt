@@ -5,11 +5,13 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.vectorstores import DeepLake
 from langchain.embeddings.openai import OpenAIEmbeddings
 
+from ..utils.colors import Color
+
 class AnalyzeCode:
     '''
     Analyze code
     '''
-    def __init__(self, username, dataset_name, model_name):
+    def __init__(self, username, dataset_name, model_name="gpt-3.5-turbo"):
         self.username = username
         self.dataset_path = f"hub://{self.username}/{dataset_name}"
         self.model_name = model_name
@@ -24,6 +26,19 @@ class AnalyzeCode:
         self.qa = ConversationalRetrievalChain.from_llm(self.model, retriever=self.retriever)
         self.chat_history = []
 
+    def interact(self):
+        '''
+        Queries an index to allow coversational QA
+        '''
+        Color.print("{G}Please enter your question (or 'exit' to stop): ")
+        while True:
+            Color.print("{G}Question: ")
+            question = input()
+            if question.lower() == "exit":
+                break
+            answer = self.ask_question(question)
+            Color.print("{B}Answer: {W}" + answer)
+    
     def ask_question(self, question):
         '''
         Ask Questions about your code

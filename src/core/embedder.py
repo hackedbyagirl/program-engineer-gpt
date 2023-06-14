@@ -7,8 +7,7 @@ from ..utils.colors import Color
 
 
 class CodeEmbedder:
-    def __init__(self, index_name, username, code_chunks):
-        self.code_chunks = code_chunks
+    def __init__(self, index_name, username):
         self.index_name = index_name
         self.username = username
 
@@ -26,8 +25,6 @@ class CodeEmbedder:
             public=False,
         )
         self.remove_temp_dir()
-        Color.print("{Y}To analyze this data, please run the following command:\n")
-        Color.print("{GR}python3 ca_gpt.py analyze --dataset " + self.index_name)
 
     def get_all_embeddings(self):
         pass

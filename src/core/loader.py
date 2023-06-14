@@ -8,8 +8,7 @@ from ..utils.colors import Color
 
 
 class CodeLoader:
-    def __init__(self, repository):
-        self.repository = repository
+    def __init__(self):
         self.code_files = []
         self.chunks = []
         self.extensions = [
@@ -45,35 +44,50 @@ class CodeLoader:
             "dockerignore",
             "editorconfig",
         ]
+        Color.print("\n\n{G}Launching Code Loader...\n")
 
-    def load_repository(self):
+    def load_online_repo(self, url):
         """
-        Load all Python files from the specified repository.
+        Load all code files from the specified repository.
         """
-        if "github.com/" in self.repository or "gitlab.com/" in self.repository:
-            # If the repository is a GitHub repository, clone it locally first
+        if "github.com/" in url or "gitlab.com/" in url:
+            # Clone repository
             try:
                 Color.print("{G}Step 1: {W}Retrieving Code from Online Repository")
-                os.system(f"git clone --quiet {self.repository} temp_repo")
-                root_dir = "temp_repo"
+                os.system(f"git clone --quiet {url} temp_repo")
+                self.load("temp_repo")
+            
+            except Exception as e:
+                Color.print("{R}!!!: {W}Failed to clone GitHub repository from {Y}" + url)
+                Color.p_error(e)
+        
+        return self.chunks
+                
 
-            except Exception as error:
-                raise Exception(f"Failed to clone GitHub repository: {error}")
+    def load_directory(self, path):
+        """
+        Load all code files from a specified directory.
+        """
+        # Get code from provided directory
+        Color.print("{G}Step 1: {W}Retrieving Code from Local Repository")
+        if not os.path.isdir(path):
+            raise Exception(f"Invalid local directory: {path}")
+        self.load(path)
+        return self.chunks
 
-        elif self.repository == ".":
-            # Get code from current directory
-            Color.print("{G}Step 1: {W}Retrieving Code from Current Directory")
-            root_dir = os.getcwd()
+    def load_current_directory(self):
+        """
+        Load all code files from the current directory.
+        """
+        Color.print("{G}Step 1: {W}Retrieving Code from Current Directory")
+        self.load(os.getcwd())
+        return self.chunks
 
-        else:
-            # Get code from provided directory
-            Color.print("{G}Step 1: {W}Retrieving Code from Local Repository")
-            if not os.path.isdir(self.repository):
-                raise Exception(f"Invalid local directory: {self.repository}")
-
-            root_dir = self.repository
-
-        # Walk through the directory load all repository files
+       
+    def load(self, root_dir):
+        """
+        Load all code files from the root directory.
+        """
         try:
             Color.print("{G}Step 2: {W}Loading Code for Indexing and Embedding")
             for dirpath, dirnames, filenames in os.walk(root_dir):
@@ -81,9 +95,9 @@ class CodeLoader:
                     if file.split(".")[-1] in self.extensions:
                         loader = TextLoader(os.path.join(dirpath, file))
                         self.code_files.extend(loader.load())
-
-        except Exception as error:
-            raise Exception(f"Failed to load code files: {error}")
+        except Exception as e:
+            Color.print("{R}!!!: {W}Failed to load code files from {Y}" + root_dir)
+            Color.p_error(e)
 
         len_files = str(len(self.code_files))
         Color.print("{Y}Number of Loaded Files: {W}" + len_files)
