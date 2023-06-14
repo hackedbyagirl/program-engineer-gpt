@@ -31,7 +31,7 @@ class Config(object):
         cls.chunk_overlap = 0
         cls.embedded_size = 1536
         
-        # Will overwrite provided args    
+        # Will overwrite provided variables above 
         cls.load_args()
         cls.load_env()
 
@@ -44,22 +44,10 @@ class Config(object):
         
         args = Arguments(cls).args
                
-        #get options
-        cls.load_ops(args)
-
-    @classmethod
-    def load_ops(cls, args):
-        ''' Sets configuration values based on parsed command-line arguments '''
-        cls.module = args.module
-
-        if args.module == 'load':
-            cls.repo = args.repository if args.repository else cls.repo
-            cls.index_name = args.index if args.index else cls.index_name
-            cls.chunk_size = args.chunk_size if args.chunk_size else cls.chunk_size
-            cls.embedded_size = args.embedding_size if args.embedding_size else cls.embedded_size
-        elif args.module == 'analyze':
-            cls.dataset = args.dataset if args.dataset else cls.dataset
-            cls.model = args.model if args.model else cls.model
+        #get arguments
+        cls.chunk_size = args.chunk_size if args.chunk_size else cls.chunk_size
+        cls.embedded_size = args.embedding_size if args.embedding_size else cls.embedded_size
+        cls.model = args.model if args.model else cls.model
 
     @classmethod
     def load_env(cls):
@@ -71,7 +59,7 @@ class Config(object):
         
         cls.openai_key = os.getenv('OPENAI_API_KEY')
         cls.activeloop_key = os.getenv('ACTIVELOOP_TOKEN')
-        cls.activeloop_username = os.getenv('DEEPLAKE_ACCOUNT_NAME')
+        #cls.activeloop_username = os.getenv('DEEPLAKE_ACCOUNT_NAME')
 
     @classmethod
     def exit(cls, code=0):
