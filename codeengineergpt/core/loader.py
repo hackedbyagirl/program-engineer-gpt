@@ -3,8 +3,9 @@
 import os
 
 from langchain.document_loaders import TextLoader
-from .splitter import CodeSplitter
-from ..utils.colors import Color
+
+from codeengineergpt.core.splitter import CodeSplitter
+from codeengineergpt.utils.colors import Color
 
 
 class CodeLoader:

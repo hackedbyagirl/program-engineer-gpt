@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 
 import os
-from langchain.vectorstores import DeepLake
+
 from langchain.embeddings.openai import OpenAIEmbeddings
-from ..utils.colors import Color
+from langchain.vectorstores import DeepLake
+
+from codeengineergpt.utils.colors import Color
 
 
 class CodeEmbedder:

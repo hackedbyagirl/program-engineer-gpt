@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
-from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationalRetrievalChain
-from langchain.vectorstores import DeepLake
+from langchain.chat_models import ChatOpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.vectorstores import DeepLake
 
-from ..config import Config
-from ..utils.colors import Color
+from codeengineergpt.config import Config
+from codeengineergpt.utils.colors import Color
+
 
 class AnalyzeCode:
     '''
