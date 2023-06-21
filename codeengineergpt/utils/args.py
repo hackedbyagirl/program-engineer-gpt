@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
-import argparse, sys
-from .colors import Color
+import argparse
+import sys
+from codeengineergpt.utils.colors import Color
+
 
 class Arguments(object):
-    ''' Holds arguments used by CodeAssistantGPT '''
+    '''Holds arguments used by CodeAssistantGPT'''
 
     def __init__(self, configuration):
         self.verbose = '-v' in sys.argv or '-hv' in sys.argv or '-vh' in sys.argv
@@ -15,28 +17,33 @@ class Arguments(object):
         if self.verbose:
             return Color.s(msg)
         else:
-            return argparse.SUPPRESS 
+            return argparse.SUPPRESS
 
     def get_arguments(self):
-        ''' Returns parser.args() containing all program arguments '''
-        parser = argparse.ArgumentParser(description="CodeAssistantGPT: An AI tool designed to assist with a variety of coding tasks.")
+        '''Returns parser.args() containing all program arguments'''
+        parser = argparse.ArgumentParser(
+            description="CodeAssistantGPT: An AI tool designed to assist with a variety of coding tasks."
+        )
 
         parser.add_argument(
-            "-c", "--chunk_size",
+            "-c",
+            "--chunk_size",
             type=int,
             default=1000,
             help="The size of the chunks to split the code into for analysis. Default is 1000.",
         )
 
         parser.add_argument(
-            "-e", "--embedding_size",
+            "-e",
+            "--embedding_size",
             type=int,
             default=1536,
             help="The size of the embeddings to use for semantic analysis. Default is 1536.",
         )
 
         parser.add_argument(
-            "-m", "--model",
+            "-m",
+            "--model",
             type=str,
             default="gpt-3.5-turbo-16k",
             help="The name of the GPT model to use for answering questions. Default is 'gpt-3.5-turbo-16k'.",
@@ -44,11 +51,12 @@ class Arguments(object):
 
         return parser.parse_args()
 
+
 if __name__ == '__main__':
-    from .utils.colors import Color
-    from .config import Config
+    from codeengineergpt.config import Config
+
     Config.init(False)
     a = Arguments(Config)
     args = a.args
-    for (key,value) in sorted(args.__dict__.items()):
-        Color.pl('{C}%s: {G}%s{W}' % (key.ljust(21),value))
+    for key, value in sorted(args.__dict__.items()):
+        Color.pl('{C}%s: {G}%s{W}' % (key.ljust(21), value))

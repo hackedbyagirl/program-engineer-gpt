@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 
 # imports
-from .utils.colors import Color
-from .config import Config
-from .utils.display import Display
-from .utils.cli import CLI
+from codeengineergpt.utils.colors import Color
+from codeengineergpt.config import Config
+from codeengineergpt.utils.display import Display
+from codeengineergpt.utils.cli import CLI
 
-class CodeAssistantGPT(object):
+
+class CodeEngineerGPT(object):
     """
     An AI-powered tool designed to assist with a variety of coding tasks.
     This includes:
@@ -19,18 +20,26 @@ class CodeAssistantGPT(object):
     def __init__(self):
         """
         Main Entry point for the code
+        
+        Args:
+            self : Argument
+
         """
         Display.display_banner()
         Display.display_general_description()
         Color.print("{Y}Begining Setup ...\n")
         Color.print("{W}1. {P}Setting up required configurations\n")
-        
+
         # Initialize Config
         Config.init()
 
     def launch(self):
-        '''
+        """
         Launches the main interactive interface.
-        '''
+        
+        Args:
+            self : Argument
+
+        """
         app = CLI()
         app.launc_main_cli()
