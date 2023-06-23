@@ -4,7 +4,6 @@
 
 def get_project_description():
     lines = []
-    print("Please enter your project description. You can enter multiple lines. When you're done, press Ctrl-D (or Ctrl-Z on Windows).")
     try:
         while True:
             line = input()

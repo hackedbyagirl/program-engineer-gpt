@@ -48,9 +48,8 @@ class CLI(object):
 
         """
         while True:
-            Display.display_mode_description()
             self.mode = questionary.rawselect(
-                "Select Mode:", choices=["Analyze", "Develop New Program", "Exit"], style=custom_style
+                "Select Mode:", choices=["Analyze", "Develop", "Exit"], style=custom_style
             ).ask()
 
             if self.mode == "Exit":
@@ -59,7 +58,7 @@ class CLI(object):
             if self.mode == "Analyze":
                 self.handle_analyze_mode()
 
-            elif self.mode == "Develop New Program":
+            elif self.mode == "Develop":
                 self.handle_develop_mode()
 
     def handle_analyze_mode(self):
@@ -93,7 +92,7 @@ class CLI(object):
         """
         Handles the Develop New Program mode
         """
-        #Display.display_develop_mode_description()  # Display the description
+        Display.display_develop_mode_description()  # Display the description
         project_description = get_project_description()
 
         Color.print("\n\n{Y}You entered:")

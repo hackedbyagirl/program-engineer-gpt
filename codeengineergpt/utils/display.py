@@ -1,6 +1,9 @@
 #!/usr/bin/env python3 
 
-from .colors import Color
+# Imports
+import os
+
+from codeengineergpt.utils.colors import Color
 
 class Display(object):
     
@@ -21,42 +24,52 @@ class Display(object):
         Color.print(header)
 
     @staticmethod
-    def display_general_description():
+    def display_main_description():
         """
-        Display basic screen at launch
+        Display main screen at launch
         """
-        Color.print("\n\n\n{B}Welcome to CodeEngineerGPT!")
-        Color.print("\n{W}CodeEngineerGPT is an AI tool designed to assist with a variety of coding tasks. Here's what you can do with it:")
-        Color.print("\n\t- {L}Analyze a code repository: {W}Understand the structure, dependencies, and other details of a codebase.")
-        Color.print("\n\t- {L}Develop a new project: {W}Get assistance in setting up a new coding project, including planning and setup.")
-        Color.print("\n\t- {L}Generate Code: {W}Have the AI generate code snippets based on your requirements.")
-        Color.print("\n\t- {L}Debug and Improve Code: {W}Get help in debugging your code and suggestions for improvements.\n")
-        #Color.print("{Y}Please select a mode to start using the tool's functionality.")
+        # Welcome Message
+        Color.print("\n\n{B}Welcome to CodeEngineerGPT!")
+        Color.print("\n{W}CodeEngineerGPT is an AI tool designed to assist with a variety of coding tasks. Here's how you can use the tool:")
 
-    @staticmethod
-    def display_mode_description():
-        """
-        Display Mode description screen
-        """
+        # Modes of Operation
         Color.print("\n\n{B}Modes of Operation:")
-        Color.print("\n{G}1. Analyze Mode:\n")
-        Color.print("\t{W}In this mode, CodeEngineerGPT can analyze a code repository. This includes understanding the structure, dependencies, and other details of a codebase.\n")
-        Color.print("\t{L}Use Case: {W}You have a large codebase and you want to understand its structure, dependencies, and other details. You can use the 'Analyze' mode to get a comprehensive analysis of the codebase.")
-        
-        Color.print("\n{G}2. Develop Mode:\n")
-        Color.print("\t{W}In this mode, CodeEngineerGPT can assist you in setting up a new coding project. This includes planning the project structure, setting up the development environment, and other setup tasks.\n")
-        Color.print("\t{L}Use Case: {W}You are starting a new project and you need assistance in planning the project structure and setting up the development environment. You can use the 'Develop' mode to get assistance with these tasks.")
-        
-        Color.print("\n{Y}Please select a mode to start using the tool's functionality.\n")
+ 
+        # Mode: Analyze
+        Color.print("\n{G}Analyze Mode:")
+        Color.print("\n{W}In the 'Analyze' mode, CodeEngineerGPT will thoroughly examine the provided code repository. You will be engaged in an interactive chat session where you can pose queries about the codebase. This could include questions about its structure, dependencies, functions, or any other aspect. The AI will respond with insights, helping you gain a deeper understanding of the code repository.")
+        Color.print("\n{L}Use Case: {W}You have a large codebase and you want to understand its structure, dependencies, and other details. You can use the 'Analyze' mode to get a comprehensive analysis of the codebase.")
+
+         # Mode: Develop
+        Color.print("\n{G}Develop Mode:")
+        Color.print("\n{W}In the 'Develop' mode, CodeEngineerGPT can assist you in setting up a new coding project. This includes planning the project structure, setting up the development environment, and other setup tasks.")
+        Color.print("\n{L}Use Case: {W}You are starting a new project and you need assistance in planning the project structure and setting up the development environment. You can use the 'Develop' mode to get assistance with these tasks.")
+
+        Color.print("\n\n{Y}Please select a mode to start using the tool's functionality.\n")
 
     @staticmethod
     def display_analyze_mode_description():
-        Color.print("\n{B}Analyze Mode:")
-        Color.print("{W}In the 'Analyze' mode, CodeEngineerGPT can analyze a code repository. This includes understanding the structure, dependencies, and other details of a codebase.\n")
-        Color.print("{W}You can provide a codebase in one of the following ways:\n")
-        Color.print("\t{W} 1. A URL to an online repository (like GitHub or GitLab)")
-        Color.print("\t{W} 2. A local path to a code repository on your machine")
-        Color.print("\t{W} 3. Using your current directory\n")
-        Color.print("{X}Alternatively, if you already have a codebase indexed using Deeplake, you can provide the required information to your code hub\n")
-        Color.print("Once the codebase is provided, CodeEngineerGPT will load and/or retrieve the code. After this is complete, you can enter a chat session with the code, where you can ask questions and get insights about the code.\n")
-        Color.print("\n{Y}Please provide the necessary details to start the 'Analyze' mode.")                                                                                  
+        Display.clear_screen()
+        Color.print("\n{B}*** Welcome to Analyze Mode *** \n")
+        Color.print("{W}In this mode, CodeEngineerGPT acts as your personal code assistant. You'll enter an interactive chat where you can ask about the code's structure, dependencies, and more. The AI will provide insightful responses to help you understand your codebase better.")
+        Color.print("\n{X}Alternatively, if you already have a codebase indexed using Deeplake, you can provide the required information to your code hub\n")
+        Color.print("\n{Y}Please provide the necessary details to start the 'Analyze' mode.")    
+
+    @staticmethod
+    def display_develop_mode_description():
+        """
+        Display Develop Mode description screen
+        """
+        Display.clear_screen()
+        Color.print("\n{B}*** Welcome Develop Mode*** \n")
+        Color.print("{W}In this mode, CodeEngineerGPT will assist you in creating a new project. You will enter an interactive session where you will provide a project description of the program/project you want to create.\n")
+        Color.print("{W}After you provide a project description, the AI system will ask further questions to gather more information about your project. Your responses will guide the AI in providing the best assistance for your project.\n")
+        Color.print("\n{B}To Begin: {W}Please provide a description for your new project. You are able to enter multiple lines using the 'ENTER' button.\n")
+        Color.print("{Y}NOTE: {W}Use Ctrl-D (or Ctrl-Z on Windows) when finished.")
+        Color.print("\n\n{P}Project Description:\n")
+
+    @staticmethod
+    def clear_screen():
+        """ Clear Screen """
+        os.system('cls' if os.name == 'nt' else 'clear')
+                                                                            
