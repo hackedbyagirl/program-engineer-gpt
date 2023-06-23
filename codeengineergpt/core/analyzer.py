@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
@@ -24,7 +25,7 @@ class AnalyzeCode:
         self.retriever.search_kwargs['fetch_k'] = 100
         self.retriever.search_kwargs['maximal_marginal_relevance'] = True
         self.retriever.search_kwargs['k'] = 10
-        self.model = ChatOpenAI(model_name=self.model_name)
+        self.model = ChatOpenAI(model_name=self.model_name, streaming=True, callbacks=[StreamingStdOutCallbackHandler()])
         self.qa = ConversationalRetrievalChain.from_llm(self.model, retriever=self.retriever)
         self.chat_history = []
 
@@ -32,14 +33,15 @@ class AnalyzeCode:
         '''
         Queries an index to allow coversational QA
         '''
-        Color.print("{G}Please enter your question (or 'exit' to stop): ")
+        Color.print("\n\n{Y}Please enter your question (or 'exit' to stop): ")
         while True:
-            Color.print("{G}Question: ")
+            Color.print("\n{G}Question: ")
             question = input()
             if question.lower() == "exit":
                 break
+            Color.print("\n{B}Answer:\n")
             answer = self.ask_question(question)
-            Color.print("{B}Answer: {W}" + answer)
+            Color.print("{W}" + answer)
     
     def ask_question(self, question):
         '''
