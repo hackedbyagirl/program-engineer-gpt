@@ -27,8 +27,6 @@ class CodeEngineerGPT(object):
         """
         Display.display_banner()
         Display.display_main_description()
-        #Color.print("{Y}Begining Setup ...\n")
-        #Color.print("{W}1. {P}Setting up required configurations\n")
 
         # Initialize Config
         Config.init()
