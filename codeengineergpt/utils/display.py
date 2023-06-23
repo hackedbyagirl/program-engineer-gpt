@@ -64,10 +64,18 @@ class Display(object):
         Color.print("\n{B}*** Welcome Develop Mode*** \n")
         Color.print("{W}In this mode, CodeEngineerGPT will assist you in creating a new project. You will enter an interactive session where you will provide a project description of the program/project you want to create.\n")
         Color.print("{W}After you provide a project description, the AI system will ask further questions to gather more information about your project. Your responses will guide the AI in providing the best assistance for your project.\n")
-        Color.print("\n{B}To Begin: {W}Please provide a description for your new project. You are able to enter multiple lines using the 'ENTER' button.\n")
-        Color.print("{Y}NOTE: {W}Use Ctrl-D (or Ctrl-Z on Windows) when finished.")
-        Color.print("\n\n{P}Project Description:\n")
 
+    @staticmethod
+    def display_interactive_chat_banner():
+        """
+        Display welcome banner for interactive chat in Analyze Mode
+        """
+        Display.clear_screen()
+        Color.print("\n{B}Welcome to the Interactive Chat Session in Analyze Mode!\n")
+        Color.print("\n{W}You are now in an interactive chat session with CodeEngineerGPT. Feel free to ask any questions about the code repository you provided. The AI will provide insightful responses based on its analysis of the codebase.\n")
+
+        Color.print("\n{B}To Begin: {W}Please enter your question (or 'exit' to stop): ")
+            
     @staticmethod
     def clear_screen():
         """ Clear Screen """

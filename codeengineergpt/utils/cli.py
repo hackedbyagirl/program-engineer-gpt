@@ -93,9 +93,21 @@ class CLI(object):
         Handles the Develop New Program mode
         """
         Display.display_develop_mode_description()  # Display the description
+        
+        # Get Project Name
+        Color.print("\n{B}Step 1: {W}Please provide folder name for your project")
+        project_name = input("Project Folder: ")
+
+        # Get project Description
+        Color.print("\n{B}Step 2: {W}Please provide a description for your new project. You are able to enter multiple lines using the 'ENTER' button.")
+        Color.print("{Y}NOTE: {W}Use Ctrl-D (or Ctrl-Z on Windows) when finished.")
+        Color.print("\n\n{P}Project Description:\n")
         project_description = get_project_description()
 
-        Color.print("\n\n{Y}You entered:")
+        Color.print("\n\n{Y}Project Name:")
+        Color.print("{L}" + project_name)
+
+        Color.print("\n\n{Y}Project Description:")
         Color.print("{L}" + project_description)
 
 
