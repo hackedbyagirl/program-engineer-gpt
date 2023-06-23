@@ -31,7 +31,7 @@ cycler==0.11.0
 dataclasses-json==0.5.8
 debugpy==1.6.7
 decorator==5.1.1
-deeplake==3.6.3
+deeplake==3.6.6
 defusedxml==0.7.1
 dill==0.3.6
 entrypoints==0.4
