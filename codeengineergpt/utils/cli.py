@@ -48,7 +48,7 @@ class CLI(object):
         while True:
             Display.display_mode_description()
             self.mode = questionary.rawselect(
-                "Select Mode:", choices=["Analyze", "Develop", "Exit"], style=custom_style
+                "Select Mode:", choices=["Analyze", "Develop New Program", "Exit"], style=custom_style
             ).ask()
 
             if self.mode == "Exit":
@@ -57,16 +57,12 @@ class CLI(object):
             if self.mode == "Analyze":
                 self.handle_analyze_mode()
 
-            elif self.mode == "Develop":
+            elif self.mode == "Develop New Program":
                 self.handle_develop_mode()
 
     def handle_analyze_mode(self):
         """
-        Handles required parameters for this Analyze Mode
-        
-        Args:
-            self : Argument
-
+        Handles required parameters for this Analyze Mode        
         """
         Display.display_analyze_mode_description()
         method = questionary.rawselect(
@@ -91,6 +87,8 @@ class CLI(object):
         elif method == "Deeplake repo index":
             self.handle_existing()
 
+    def handle_develop_mode(self):
+    
     def handle_url(self):
         """
         Gets URL and sends to loader
