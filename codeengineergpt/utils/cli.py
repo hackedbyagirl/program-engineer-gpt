@@ -9,7 +9,9 @@ from questionary import Style, ValidationError, Validator
 from codeengineergpt.core.analyzer import AnalyzeCode
 from codeengineergpt.core.embedder import CodeEmbedder
 from codeengineergpt.core.loader import CodeLoader
+from codeengineergpt.utils.colors import Color
 from codeengineergpt.utils.display import Display
+from codeengineergpt.utils.input import get_project_description
 
 ## CLI Styler
 custom_style = Style(
@@ -88,7 +90,16 @@ class CLI(object):
             self.handle_existing()
 
     def handle_develop_mode(self):
-    
+        """
+        Handles the Develop New Program mode
+        """
+        #Display.display_develop_mode_description()  # Display the description
+        project_description = get_project_description()
+
+        Color.print("\n\n{Y}You entered:")
+        Color.print("{L}" + project_description)
+
+
     def handle_url(self):
         """
         Gets URL and sends to loader
