@@ -1,12 +1,13 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 
 # Imports
 import os
 
 from programengineergpt.utils.colors import Color
 
+
 class Display(object):
-    
+
     @staticmethod
     def display_banner():
         design = ('\n'
@@ -16,8 +17,8 @@ class Display(object):
                 '    / ____/ /  / /_/ / /_/ / /  / /_/ / / / / / / /___/ / / / /_/ / / / / /  __/  __/ /  / /_/ / ____// /      \n'
                 '   /_/   /_/   \____/\__, /_/   \__,_/_/ /_/ /_/_____/_/ /_/\__, /_/_/ /_/\___/\___/_/   \____/_/    /_/       \n'
                 '                    /____/                                 /____/                                              \n'
-                '\n')                     
-        
+                '\n')
+
         Color.print('{B}' + design)
         header = '{R}                                   @hackedbyagirl {W}| {C} Hack the World\n'
         Color.print(header)
@@ -33,7 +34,7 @@ class Display(object):
 
         # Modes of Operation
         Color.print("\n\n{B}Modes of Operation:")
- 
+
         # Mode: Analyze
         Color.print("\n{G}Analyze Mode:")
         Color.print("\n{W}In the 'Analyze' mode, ProgramEngineerGPT will thoroughly examine the provided code repository. You will be engaged in an interactive chat session where you can pose queries about the codebase. This could include questions about its structure, dependencies, functions, or any other aspect. The AI will respond with insights, helping you gain a deeper understanding of the code repository.")
@@ -52,7 +53,7 @@ class Display(object):
         Color.print("\n{B}*** Welcome to Analyze Mode *** \n")
         Color.print("{W}In this mode, ProgramEngineerGPT acts as your personal code assistant. You'll enter an interactive chat where you can ask about the code's structure, dependencies, and more. The AI will provide insightful responses to help you understand your codebase better.")
         Color.print("\n{X}Alternatively, if you already have a codebase indexed using Deeplake, you can provide the required information to your code hub\n")
-        Color.print("\n{Y}Please provide the necessary details to start the 'Analyze' mode.")    
+        Color.print("\n{Y}Please provide the necessary details to start the 'Analyze' mode.")
 
     @staticmethod
     def display_develop_mode_description():
@@ -84,9 +85,8 @@ class Display(object):
         Color.print("\n{B}Welcome to the Interactive Project Developer!\n")
         Color.print("\n{W}You are now in an interactive session with ProgramEngineerGPT. This mode will assist you in setting up a new coding project, from planning the project structure to setting up the development environment. The AI will provide assistance based on the information you provide.\n")
 
-            
+
     @staticmethod
     def clear_screen():
         """ Clear Screen """
         os.system('cls' if os.name == 'nt' else 'clear')
-                                                                            

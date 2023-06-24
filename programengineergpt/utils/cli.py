@@ -4,12 +4,13 @@
 import re
 
 import questionary
+
 from questionary import Style, ValidationError, Validator
 
 from programengineergpt.core.analyzer import AnalyzeCode
+from programengineergpt.core.developer import Developer
 from programengineergpt.core.embedder import CodeEmbedder
 from programengineergpt.core.loader import CodeLoader
-from programengineergpt.core.developer import Developer
 from programengineergpt.utils.colors import Color
 from programengineergpt.utils.display import Display
 from programengineergpt.utils.input import get_project_description
@@ -43,7 +44,7 @@ class CLI(object):
     def launc_main_cli(self):
         """
         Get mode
-        
+
         Args:
             self : Argument
 
@@ -64,7 +65,7 @@ class CLI(object):
 
     def handle_analyze_mode(self):
         """
-        Handles required parameters for this Analyze Mode        
+        Handles required parameters for this Analyze Mode
         """
         Display.display_analyze_mode_description()
         method = questionary.rawselect(
@@ -94,7 +95,7 @@ class CLI(object):
         Handles the Develop New Program mode
         """
         Display.display_develop_mode_description()  # Display the description
-        
+
         # Get Project Name
         Color.print("\n{B}Step 1: {W}Please provide folder name for your project")
         project_name = input("Project Folder: ")
@@ -106,7 +107,7 @@ class CLI(object):
         project_description = get_project_description()
 
         # Initialize Developer
-        developer = Developer(project_description, project_name)
+        Developer(project_description, project_name)
 
         # Continue with the rest of your logic here using the developer instance
 
@@ -114,7 +115,7 @@ class CLI(object):
     def handle_url(self):
         """
         Gets URL and sends to loader
-        
+
         Args:
             self : Argument
 
@@ -132,7 +133,7 @@ class CLI(object):
     def handle_path(self):
         """
         Gets Code Directory Path and sends to loader
-        
+
         Args:
             self : Argument
 
@@ -147,7 +148,7 @@ class CLI(object):
     def handle_cwd(self):
         """
         Launches loader that handles current directory
-        
+
         Args:
             self : Argument
 
@@ -159,7 +160,7 @@ class CLI(object):
     def handle_existing(self):
         """
         Handles and loads existing code index from deeplake
-        
+
         Args:
             self : Argument
 
@@ -194,7 +195,7 @@ class CLI(object):
     def embed_new(self, chunks):
         """
         Handles required parameters for creating a code index
-        
+
         Args:
             self : Argument
             chunks : Argument

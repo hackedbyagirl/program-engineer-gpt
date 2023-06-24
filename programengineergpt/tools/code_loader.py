@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 
 # Imports
-from langchain.tools import BaseTool
 from typing import Optional, Type
-from langchain.callbacks.manager import AsyncCallbackManagerForToolRun, CallbackManagerForToolRun
+
+from langchain.callbacks.manager import (
+    AsyncCallbackManagerForToolRun,
+    CallbackManagerForToolRun,
+)
+from langchain.tools import BaseTool
 from pydantic import BaseModel, Field
-from ..core.loader import CodeLoader
+
 from ..core.embedder import CodeEmbedder
+from ..core.loader import CodeLoader
+
 
 # Define the input schema for the tool
 class CodeLoadingInput(BaseModel):
@@ -32,7 +38,7 @@ class CodeLoaderTool(BaseTool):
         embed.embed_and_upload(code_chunks)
 
         # For the sake of this example, we will just return a dummy string
-        return f"Code loading for repository '{repository}' completed successfully." 
+        return f"Code loading for repository '{repository}' completed successfully."
 
     async def _arun(self, repository: str, run_manager: Optional[AsyncCallbackManagerForToolRun] = None) -> str:
         """Use the tool asynchronously."""

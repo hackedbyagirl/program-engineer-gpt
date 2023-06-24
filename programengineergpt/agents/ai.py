@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
 # Imports
+
 import openai
-import time
 
 from programengineergpt.config import Config
+
 
 class AIAgent:
     def __init__(self):
@@ -16,7 +17,7 @@ class AIAgent:
         except openai.InvalidRequestError:
             print(
                 f"Model {self.model} not available for provided API key. Please Update your configuration file")
-            
+
 
     def launch(self, system_prompt, user_prompt):
         # Create a list of two dictionaries representing a system role and a user role

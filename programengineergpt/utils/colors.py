@@ -28,7 +28,7 @@ class Color(object):
         Prints text using colored format on same line.
         Example:
             Color.print('{R}This text is red. {W}This text is white')
-        
+
         Args:
             text : Argument. g colored format on same line.
         Example:

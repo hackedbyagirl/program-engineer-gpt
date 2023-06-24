@@ -19,7 +19,7 @@ class CodeEmbedder:
         """
         Color.print("{G}Step 4: {W}Embedding and Uploading files to Deeplake Index")
         embeddings = OpenAIEmbeddings()
-        db = DeepLake.from_documents(
+        DeepLake.from_documents(
             documents=code_chunks,
             dataset_path=f"hub://{self.username}/{self.index_name}",
             embedding=embeddings,
@@ -30,7 +30,7 @@ class CodeEmbedder:
 
     def get_all_embeddings(self):
         pass
-    
+
     def remove_temp_dir(self):
         """
         Remove 'temp_repo' if a repository was cloned

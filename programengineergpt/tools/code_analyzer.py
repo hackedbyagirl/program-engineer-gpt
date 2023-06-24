@@ -2,11 +2,17 @@
 
 # Imports
 
-from langchain.tools import BaseTool
 from typing import Optional, Type
-from langchain.callbacks.manager import AsyncCallbackManagerForToolRun, CallbackManagerForToolRun
+
+from langchain.callbacks.manager import (
+    AsyncCallbackManagerForToolRun,
+    CallbackManagerForToolRun,
+)
+from langchain.tools import BaseTool
 from pydantic import BaseModel, Field
+
 from ..core.analyzer import AnalyzeCode
+
 
 # Define the input schema for the tool
 class CodeAnalyzingInput(BaseModel):

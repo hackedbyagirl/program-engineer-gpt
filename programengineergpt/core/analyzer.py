@@ -11,7 +11,6 @@ from programengineergpt.utils.colors import Color
 from programengineergpt.utils.display import Display
 
 
-
 class AnalyzeCode:
     '''
     Analyze code
@@ -42,9 +41,9 @@ class AnalyzeCode:
             if question.lower() == "exit":
                 break
             Color.print("\n{B}Answer:\n")
-            answer = self.ask_question(question)
+            self.ask_question(question)
             #Color.print("{W}" + answer)
-    
+
     def ask_question(self, question):
         '''
         Ask Questions about your code

@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 
 # imports
-from langchain.tools import BaseTool
 from typing import Optional, Type
-from langchain.callbacks.manager import AsyncCallbackManagerForToolRun, CallbackManagerForToolRun
-from pydantic import BaseModel, Field
-from openai import OpenAI, ChatCompletion
+
+from langchain.callbacks.manager import (
+    AsyncCallbackManagerForToolRun,
+    CallbackManagerForToolRun,
+)
+from langchain.tools import BaseTool
 from langchain.vectorstores import DeepLake
+from openai import OpenAI
+from pydantic import BaseModel, Field
+
 
 # Define the input schema for the tool
 class CodeWritingInput(BaseModel):

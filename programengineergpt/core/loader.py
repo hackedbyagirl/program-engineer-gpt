@@ -58,13 +58,13 @@ class CodeLoader:
                 Color.print("{G}Step 1: {W}Retrieving Code from Online Repository")
                 os.system(f"git clone --quiet {url} temp_repo")
                 self.load("temp_repo")
-            
+
             except Exception as e:
                 Color.print("{R}!!!: {W}Failed to clone GitHub repository from {Y}" + url)
                 Color.p_error(e)
-        
+
         return self.chunks
-                
+
 
     def load_directory(self, path):
         """
@@ -85,7 +85,7 @@ class CodeLoader:
         self.load(os.getcwd())
         return self.chunks
 
-       
+
     def load(self, root_dir):
         """
         Load all code files from the root directory.

@@ -2,8 +2,8 @@
 
 # imports
 from programengineergpt.config import Config
-from programengineergpt.utils.display import Display
 from programengineergpt.utils.cli import CLI
+from programengineergpt.utils.display import Display
 
 
 class ProgramEngineerGPT(object):

@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
 import os
+
 import pytest
+
 from src.core.loader import CodeLoader
+
 
 @pytest.fixture
 def cleanup():

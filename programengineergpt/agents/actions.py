@@ -5,6 +5,7 @@ import questionary
 
 from programengineergpt.utils.colors import Color
 
+
 class Actions:
     def __init__(self, ai_agent):
         self.ai_agent = ai_agent
@@ -30,7 +31,7 @@ class Actions:
             messages = self.ai_agent.next_step(messages, clarification)
 
         return messages
-    
+
     def gen_code(self, system_prompt, messages):
         # Use the messages as the user prompt and the system prompt to call the next_step method of the AI agent
         return self.ai_agent.next_step(messages, system_prompt)
