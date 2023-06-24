@@ -7,8 +7,9 @@
 
 <div align="center">
 
-  [![Status](https://img.shields.io/badge/status-in%20development-yellowgreen)](https://github.com/hackedbyagirl/ProgramEngineerGPT) 
+  [![Status](https://img.shields.io/badge/status-in%20active-green)](https://github.com/hackedbyagirl/ProgramEngineerGPT) 
   [![GitHub Issues](https://img.shields.io/github/issues/hackedbyagirl/ProgramEngineerGPT)](https://github.com/hackedbyagirl/ProgramEngineerGPT/issues)
+  [![Twitter Follow](https://img.shields.io/twitter/follow/hackedbyagirl?style=social)](https://twitter.com/hackedbyagirl)
 
 </div>
 
