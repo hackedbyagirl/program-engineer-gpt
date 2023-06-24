@@ -74,22 +74,6 @@ setx ACTIVELOOP_TOKEN <ACTIVELOOP_API_KEY>
 setx DEEPLAKE_ACCOUNT_NAME <DEEPLAKE_ACCOUNT_NAME>
 ```
 
-**pip package**
-```bash
-pip install pgpt
-```
-
-**local package**
-Clone the repository
-```bash
-#Download Repo and Navigate to Directory
-git clone https://github.com/hackedbyagirl/ProgramEngineerGPt.git
-cd ProgramEngineerGPT
-pip install -e .
-pgpt
-```
-
-**python program**
 Clone the repository
 ```bash
 #Download Repo and Navigate to Directory
@@ -100,7 +84,6 @@ Install all the required packages
 ```
 python3 -m pip install -r requirements.txt
 ```
-
 
 ## Usage <a name="usage"></a>
 You can start using ProgramEngineerGPT by running the main script and selecting the mode of operation. Depending on the mode, you will be asked to provide further details such as the code repository URL or the project description.
