@@ -6,13 +6,13 @@ import re
 import questionary
 from questionary import Style, ValidationError, Validator
 
-from codeengineergpt.core.analyzer import AnalyzeCode
-from codeengineergpt.core.embedder import CodeEmbedder
-from codeengineergpt.core.loader import CodeLoader
-from codeengineergpt.core.developer import Developer
-from codeengineergpt.utils.colors import Color
-from codeengineergpt.utils.display import Display
-from codeengineergpt.utils.input import get_project_description
+from programengineergpt.core.analyzer import AnalyzeCode
+from programengineergpt.core.embedder import CodeEmbedder
+from programengineergpt.core.loader import CodeLoader
+from programengineergpt.core.developer import Developer
+from programengineergpt.utils.colors import Color
+from programengineergpt.utils.display import Display
+from programengineergpt.utils.input import get_project_description
 
 ## CLI Styler
 custom_style = Style(

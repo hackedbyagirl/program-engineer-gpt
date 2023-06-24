@@ -4,7 +4,7 @@
 import openai
 import time
 
-from codeengineergpt.config import Config
+from programengineergpt.config import Config
 
 class AIAgent:
     def __init__(self):

@@ -3,7 +3,7 @@
 # Imports
 import os
 from dotenv import load_dotenv
-from codeengineergpt.utils.args import Arguments
+from programengineergpt.utils.args import Arguments
 
 
 class Config(object):

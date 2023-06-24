@@ -5,7 +5,7 @@ import os
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import DeepLake
 
-from codeengineergpt.utils.colors import Color
+from programengineergpt.utils.colors import Color
 
 
 class CodeEmbedder:

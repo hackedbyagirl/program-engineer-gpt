@@ -3,12 +3,12 @@
 # Imports
 import os
 
-from codeengineergpt.agents.ai import AIAgent
-from codeengineergpt.agents.actions import Actions
-from codeengineergpt.prompts.intro import INTRO_SYSTEM_PROMPT
-from codeengineergpt.prompts.setup_project import PROJECT_SETUP
-from codeengineergpt.utils.colors import Color
-from codeengineergpt.utils.display import Display
+from programengineergpt.agents.ai import AIAgent
+from programengineergpt.agents.actions import Actions
+from programengineergpt.prompts.intro import INTRO_SYSTEM_PROMPT
+from programengineergpt.prompts.setup_project import PROJECT_SETUP
+from programengineergpt.utils.colors import Color
+from programengineergpt.utils.display import Display
 
 class Developer:
     def __init__(self, project_description, project_folder):

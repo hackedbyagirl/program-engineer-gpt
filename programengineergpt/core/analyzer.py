@@ -6,9 +6,9 @@ from langchain.chat_models import ChatOpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import DeepLake
 
-from codeengineergpt.config import Config
-from codeengineergpt.utils.colors import Color
-from codeengineergpt.utils.display import Display
+from programengineergpt.config import Config
+from programengineergpt.utils.colors import Color
+from programengineergpt.utils.display import Display
 
 
 

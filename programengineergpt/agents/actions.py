@@ -3,7 +3,7 @@
 # Imports
 import questionary
 
-from codeengineergpt.utils.colors import Color
+from programengineergpt.utils.colors import Color
 
 class Actions:
     def __init__(self, ai_agent):

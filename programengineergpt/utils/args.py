@@ -2,7 +2,7 @@
 
 import argparse
 import sys
-from codeengineergpt.utils.colors import Color
+from programengineergpt.utils.colors import Color
 
 
 class Arguments(object):
@@ -53,9 +53,9 @@ class Arguments(object):
 
 
 if __name__ == '__main__':
-    from codeengineergpt.config import Config
+    from programengineergpt.config import Config
 
-    Config.init(False)
+    Config.init()
     a = Arguments(Config)
     args = a.args
     for key, value in sorted(args.__dict__.items()):

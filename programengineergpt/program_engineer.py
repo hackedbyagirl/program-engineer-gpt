@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 
 # imports
-from codeengineergpt.utils.colors import Color
-from codeengineergpt.config import Config
-from codeengineergpt.utils.display import Display
-from codeengineergpt.utils.cli import CLI
+from programengineergpt.config import Config
+from programengineergpt.utils.display import Display
+from programengineergpt.utils.cli import CLI
 
 
 class CodeEngineerGPT(object):

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 # imports
-from codeengineergpt.code_engineer import CodeEngineerGPT
+from programengineergpt.program_engineer import CodeEngineerGPT
 
 
 ########################################################################
