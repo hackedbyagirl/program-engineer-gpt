@@ -19,6 +19,7 @@ class Actions:
 
             # Check if the user wants to move on
             if user_clarification == "No":
+                print("\n")
                 break
 
             # Get the user's clarification
