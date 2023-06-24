@@ -1,15 +1,24 @@
 # ProgramEngineerGPT
 ProgramEngineerGPT is an AI-powered tool designed to assist developers with code comprehension, exploration, and generation. It provides two main modes of operation: Analyze Mode and Develop Mode.
 
+![main](/imgs/pgpt.jpg)
+
 ## Modes of Operation
 
 ### Analyze Mode
 
 In the 'Analyze' mode, ProgramEngineerGPT will thoroughly examine a provided code repository. You will be engaged in an interactive chat session where you can pose queries about the codebase. This could include questions about its structure, dependencies, functions, or any other aspect. The AI will respond with insights, helping you gain a deeper understanding of the code repository.
 
+![cwd](/imgs/cwd.jpg)
+![chat](/imgs/chat.jpg)
+
 ### Develop Mode
 
 In the 'Develop' mode, ProgramEngineerGPT can assist you in setting up a new coding project. This includes planning the project structure, setting up the development environment, and other setup tasks. You will enter an interactive session where you will provide a project description of the program/project you want to create. After you provide a project description, the AI system will ask further questions to gather more information about your project. Your responses will guide the AI in providing the best assistance for your project.
+
+![dev](/imgs/dev-gen.jpg)
+
+![dev2](/imgs/dev-launch.jpg)
 
 ## Requirements
 - [Deeplake Account](https://app.activeloop.ai/register/)
