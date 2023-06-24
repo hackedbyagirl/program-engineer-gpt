@@ -92,9 +92,6 @@ You can start using ProgramEngineerGPT by running the main script and selecting 
 However, this program does depend on API keys so make sure to set them!
 
 ```bash
-# Python package
-pgpt
-
 # Python program
 python3 programengineergpt.py 
 ```
