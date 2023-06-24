@@ -60,6 +60,7 @@ Linux or MacOS
 export OPENAI_API_KEY="<OPENAI_API_KEY>"
 
 # Deeplake API
+# Only Required for Analyze Mode
 export ACTIVELOOP_TOKEN="<ACTIVELOOP_API_KEY>"
 export DEEPLAKE_ACCOUNT_NAME="<DEEPLAKE_ACCOUNT_NAME>"
 ```
