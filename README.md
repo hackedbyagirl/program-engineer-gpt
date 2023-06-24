@@ -1,53 +1,50 @@
-# CodeAssistantGPT
-CodeAssistantGPT is an AI-powered tool designed to assist developers with enhanced comprehension and exploration capabilities of code repositories. It incorporates several technologies, including VectorStores, LangChains Conversational RetrieverChain, and OpenAI's GPT-4 language model. With these capabilities, CodeAssistantGPT can effectively respond to inquiries about code within a GitHub or local repository and generate new code.
+# ProgramEngineerGPT
+ProgramEngineerGPT is an AI-powered tool designed to assist developers with code comprehension, exploration, and generation. It provides two main modes of operation: Analyze Mode and Develop Mode.
 
-To achieve this, the tool follows a systematic process. Firstly, it loads and thoroughly analyzes the provided code, breaking it down into smaller, manageable sections. Then, it converts these sections into a vector space, enabling semantic analysis. Finally, it employs a language model to generate accurate responses to code-related questions.
+## Modes of Operation
 
-## Features
-* Load and analyze code from a GitHub or local repository.
-* Split code into manageable chunks for analysis.
-* Embed code chunks into a vector space for semantic analysis.
-* Use OpenAI's GPT language model to answer questions about the code.
+### Analyze Mode
+
+In the 'Analyze' mode, ProgramEngineerGPT will thoroughly examine a provided code repository. You will be engaged in an interactive chat session where you can pose queries about the codebase. This could include questions about its structure, dependencies, functions, or any other aspect. The AI will respond with insights, helping you gain a deeper understanding of the code repository.
+
+### Develop Mode
+
+In the 'Develop' mode, ProgramEngineerGPT can assist you in setting up a new coding project. This includes planning the project structure, setting up the development environment, and other setup tasks. You will enter an interactive session where you will provide a project description of the program/project you want to create. After you provide a project description, the AI system will ask further questions to gather more information about your project. Your responses will guide the AI in providing the best assistance for your project.
 
 ## Requirements
 - [Deeplake Account](https://app.activeloop.ai/register/)
 - [OpenAI Account](https://openai.com/)
 
 ## Installation
+Install all the required packages
 ```
 python3 -m pip install -r requirements.txt
 ```
 
 ## Usage
-First, change the `test.env` to `.env` and add the required environmental variables.
 
-To use CodeAssistantGPT, there are two modules, `load` and `analyze`. The `load` module takes a code repository and creates an index that can be used to for further analysis. The `analyze` module allows you to ask question about any codebase that you have indexed. 
+You can start using ProgramEngineerGPT by running the main script and selecting the mode of operation. Depending on the mode, you will be asked to provide further details such as the code repository URL or the project description.
 
-### Load Module:
-Load a codebase repository from githuib or a local repository.
+However, this program does depend on API keys. You can set these API keys using environmental variables
 
-**Example**:
+### ENV Variable
+First, change the `test.env` to `.env` and add the required environmental variables. If you would like to export them locally, please use the following keys.
+
+```bash
+export OPENAI_API_KEY="<OPENAI_API_KEY>"
+export ACTIVELOOP_TOKEN="<ACTIVELOOP_API_KEY>"
+export DEEPLAKE_ACCOUNT_NAME="<DEEPLAKE_ACCOUNT_NAME>"
 ```
-python3 ca_gpt.py load --repository <repository_url> --index <index_name>
+
+### Launch
+```bash
+python3 programengineergpt.py 
 ```
-**Arguments**:
-* `--repository`: This argument specifies the URL of the GitHub repository or the path of the local repository to analyze.
-* `--index`: This argument specifies the name of the Index you want the code to be stored at.
-* `--chunk_size`: This argument specifies the size of the chunks to split the code into for analysis. The default value is 1000.
-* `--embedding_size`: This argument specifies the size of the embeddings to use for semantic analysis. The default value is 1536.
 
-### Analyze Module:
-Have a conversation with your code uploaded to the Deeplake Index
+## Contributing
 
-**Example**:
-```
-python3 ca_gpt.py analyze --dataset <dataset_name>
-```
-**Arguments**:
-* `--dataset`: This argument specifies the name of your dataset index.
-* `--model`: This argument specifies the name of the GPT model to use for answering questions. The default value is 'gpt-3.5-turbo'.
+Contributions are welcome! Please refer to the contributing guide provided in the repository.
 
+## License
 
-## Documentation
-For more detailed information about the API, please see documentation located in the `docs` directory.
-
+Please refer to the license file provided in the repository.
