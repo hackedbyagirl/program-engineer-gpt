@@ -1,10 +1,11 @@
+<h1 align="center">ProgramEngineerGPT</h1>
+
 <p align="center">
   <a href="" rel="noopener">
  <img width=400px height=400px src="https://github.com/hackedbyagirl/ProgramEngineerGPT/blob/main/imgs/kat.png" alt="Kat"></a>
 </p>
 
-
-<h1 align="center">ProgramEngineerGPT</h1>
+---
 
 <div align="center">
 
@@ -18,8 +19,6 @@
 <p align="center">ProgramEngineerGPT is an interactive command line tool that leverages the power of AI to assist developers with code comprehension, exploration, and generation. It serves as a virtual assistant that can analyze codebases, answer queries about code, and even help in setting up new coding projects.
     <br> 
 </p>
-
-
 
 ## Table of Contents
 - [About](#about)
