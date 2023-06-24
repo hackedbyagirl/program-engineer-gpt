@@ -2,7 +2,6 @@
 
 # imports
 from programengineergpt.config import Config
-from programengineergpt.utils.cli import CLI
 from programengineergpt.utils.display import Display
 
 
@@ -38,5 +37,7 @@ class ProgramEngineerGPT(object):
             self : Argument
 
         """
+        from programengineergpt.utils.cli import CLI
+        
         app = CLI()
         app.launc_main_cli()
