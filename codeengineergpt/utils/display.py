@@ -75,6 +75,16 @@ class Display(object):
         Color.print("\n{W}You are now in an interactive chat session with CodeEngineerGPT. Feel free to ask any questions about the code repository you provided. The AI will provide insightful responses based on its analysis of the codebase.\n")
 
         Color.print("\n{B}To Begin: {W}Please enter your question (or 'exit' to stop): ")
+
+    @staticmethod
+    def display_interactive_developer_banner():
+        """
+        Display welcome banner for interactive project developer
+        """
+        Display.clear_screen()
+        Color.print("\n{B}Welcome to the Interactive Project Developer!\n")
+        Color.print("\n{W}You are now in an interactive session with CodeEngineerGPT. This mode will assist you in setting up a new coding project, from planning the project structure to setting up the development environment. The AI will provide assistance based on the information you provide.\n")
+
             
     @staticmethod
     def clear_screen():

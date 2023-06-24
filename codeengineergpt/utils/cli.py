@@ -100,7 +100,7 @@ class CLI(object):
         project_name = input("Project Folder: ")
 
         # Get project Description
-        Color.print("\n{B}Step 2: {W}Please provide a description for your new project. You are able to enter multiple lines using the 'ENTER' button.")
+        Color.print("\n{B}Step 2: {W}Please provide a description for your new project. Feel free to provide as much detail as possible about your project.You are able to enter multiple lines using the 'ENTER' button.")
         Color.print("{Y}NOTE: {W}Use Ctrl-D (or Ctrl-Z on Windows) when finished.")
         Color.print("\n\n{P}Project Description:\n")
         project_description = get_project_description()
