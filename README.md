@@ -1,3 +1,8 @@
+<p align="center">
+  <a href="" rel="noopener">
+ <img width=400px height=400px src="https://github.com/hackedbyagirl/ProgramEngineerGPT/blob/main/imgs/kat.png" alt="Kat"></a>
+</p>
+
 
 <h1 align="center">ProgramEngineerGPT</h1>
 
@@ -10,9 +15,11 @@
 
 ---
 
-<p align="center"> ProgramEngineerGPT is an interactive command line tool for assiting developers with code comprehension, exploration, and generation. 
+<p align="center">ProgramEngineerGPT is an interactive command line tool that leverages the power of AI to assist developers with code comprehension, exploration, and generation. It serves as a virtual assistant that can analyze codebases, answer queries about code, and even help in setting up new coding projects.
     <br> 
 </p>
+
+
 
 ## Table of Contents
 - [About](#about)
@@ -22,12 +29,16 @@
 - [Acknowledgments](#acknowledgement)
 
 ## About <a name = "about"></a>
-ProgramEngineerGPT is an AI-powered tool designed to assist developers with code comprehension, exploration, and generation. It provides two main modes of operation: Analyze Mode and Develop Mode.
+ProgramEngineerGPT is an AI-powered tool designed to assist developers with code comprehension, exploration, and generation. ProgramEngineerGPT can be used as a comprehensive developer's assistant that can understand code at a deep level and can provide valuable insights and assistance. Whether you're trying to understand a complex codebase or starting a new project, ProgramEngineerGPT can be run using two modes of operation
+- Analyze Mode
+- Develop Mode.
 
-### Analyze Mode
-In the 'Analyze' mode, ProgramEngineerGPT will thoroughly examine a provided code repository. You will be engaged in an interactive chat session where you can pose queries about the codebase. This could include questions about its structure, dependencies, functions, or any other aspect. The AI will respond with insights, helping you gain a deeper understanding of the code repository.
+**Analyze Mode**
 
-### Develop Mode
+In the 'Analyze' mode, ProgramEngineerGPT will thoroughly examine a provided code repository. You will be engaged in an interactive chat session where you can pose queries about the codebase. This could include questions about its structure, dependencies, functions, or any other aspect. The AI will respond with insights, helping you gain a deeper understanding of the code repository and how it funtions.
+
+**Develop Mode**
+
 In the 'Develop' mode, ProgramEngineerGPT can assist you in setting up a new coding project. This includes planning the project structure, setting up the development environment, and other setup tasks. You will enter an interactive session where you will provide a project description of the program/project you want to create. After you provide a project description, the AI system will ask further questions to gather more information about your project. Your responses will guide the AI in providing the best assistance for your project.
 
 ## Getting Started <a name = "getting_started"></a>
@@ -88,20 +99,26 @@ python3 programengineergpt.py
 
 ## Examples <a name="examples"></a>
 ### Program Launch
+Main Program Home Screen
+
 ![main](/imgs/pgpt.jpg)
 
 ### Analyze Mode
 Loading Code of Current Working Directory
+
 ![cwd](/imgs/cwd.jpg)
 
 Engaging in conversation about the code
+
 ![chat](/imgs/chat.jpg)
 
 ### Develop Mode
 Providing Developer Mode with a Project Description
+
 ![dev](/imgs/dev-launch.jpg)
 
 Engaging with Developer AI Assistant
+
 ![dev2](/imgs/dev-gen.jpg)
 
 ## Contributing
