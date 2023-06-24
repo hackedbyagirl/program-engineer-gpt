@@ -5,8 +5,6 @@
  <img width=400px height=400px src="https://github.com/hackedbyagirl/ProgramEngineerGPT/blob/main/imgs/kat.png" alt="Kat"></a>
 </p>
 
----
-
 <div align="center">
 
   [![Status](https://img.shields.io/badge/status-in%20development-yellowgreen)](https://github.com/hackedbyagirl/ProgramEngineerGPT) 
