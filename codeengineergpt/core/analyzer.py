@@ -8,6 +8,8 @@ from langchain.vectorstores import DeepLake
 
 from codeengineergpt.config import Config
 from codeengineergpt.utils.colors import Color
+from codeengineergpt.utils.display import Display
+
 
 
 class AnalyzeCode:
@@ -33,7 +35,7 @@ class AnalyzeCode:
         '''
         Queries an index to allow coversational QA
         '''
-        Color.print("\n\n{Y}Please enter your question (or 'exit' to stop): ")
+        Display.display_interactive_chat_banner()
         while True:
             Color.print("\n{G}Question: ")
             question = input()
@@ -41,7 +43,7 @@ class AnalyzeCode:
                 break
             Color.print("\n{B}Answer:\n")
             answer = self.ask_question(question)
-            Color.print("{W}" + answer)
+            #Color.print("{W}" + answer)
     
     def ask_question(self, question):
         '''

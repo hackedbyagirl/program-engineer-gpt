@@ -9,7 +9,10 @@ from questionary import Style, ValidationError, Validator
 from codeengineergpt.core.analyzer import AnalyzeCode
 from codeengineergpt.core.embedder import CodeEmbedder
 from codeengineergpt.core.loader import CodeLoader
+from codeengineergpt.core.developer import Developer
+from codeengineergpt.utils.colors import Color
 from codeengineergpt.utils.display import Display
+from codeengineergpt.utils.input import get_project_description
 
 ## CLI Styler
 custom_style = Style(
@@ -46,7 +49,6 @@ class CLI(object):
 
         """
         while True:
-            Display.display_mode_description()
             self.mode = questionary.rawselect(
                 "Select Mode:", choices=["Analyze", "Develop", "Exit"], style=custom_style
             ).ask()
@@ -62,11 +64,7 @@ class CLI(object):
 
     def handle_analyze_mode(self):
         """
-        Handles required parameters for this Analyze Mode
-        
-        Args:
-            self : Argument
-
+        Handles required parameters for this Analyze Mode        
         """
         Display.display_analyze_mode_description()
         method = questionary.rawselect(
@@ -90,6 +88,28 @@ class CLI(object):
 
         elif method == "Deeplake repo index":
             self.handle_existing()
+
+    def handle_develop_mode(self):
+        """
+        Handles the Develop New Program mode
+        """
+        Display.display_develop_mode_description()  # Display the description
+        
+        # Get Project Name
+        Color.print("\n{B}Step 1: {W}Please provide folder name for your project")
+        project_name = input("Project Folder: ")
+
+        # Get project Description
+        Color.print("\n{B}Step 2: {W}Please provide a description for your new project. Feel free to provide as much detail as possible about your project.You are able to enter multiple lines using the 'ENTER' button.")
+        Color.print("{Y}NOTE: {W}Use Ctrl-D (or Ctrl-Z on Windows) when finished.")
+        Color.print("\n\n{P}Project Description:\n")
+        project_description = get_project_description()
+
+        # Initialize Developer
+        developer = Developer(project_description, project_name)
+
+        # Continue with the rest of your logic here using the developer instance
+
 
     def handle_url(self):
         """
