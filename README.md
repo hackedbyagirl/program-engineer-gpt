@@ -131,3 +131,4 @@ Please refer to the license file provided in the repository.
 ## Acknowledgements <a name = "acknowledgement"></a>
 Inspiration
 - [engineer-gpt](https://github.com/AntonOsika/gpt-engineer)
+- [PDF Chatbot](https://github.com/mayooear/gpt4-pdf-chatbot-langchain)
