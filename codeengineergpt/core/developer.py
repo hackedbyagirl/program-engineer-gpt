@@ -6,6 +6,7 @@ import os
 from codeengineergpt.agents.ai import AIAgent
 from codeengineergpt.agents.actions import Actions
 from codeengineergpt.prompts.intro import INTRO_SYSTEM_PROMPT
+from codeengineergpt.prompts.setup_project import PROJECT_SETUP
 from codeengineergpt.utils.colors import Color
 from codeengineergpt.utils.display import Display
 
@@ -42,7 +43,9 @@ class Developer:
         messages = actions.clarify(messages)
 
         # Move to the first code generation phase
-        self.first_code_generation_phase(messages)
+        system_prompt = PROJECT_SETUP
+        messages = actions.gen_code(system_prompt, messages)
+
 
     def write_output(self):
         # Save the user project input into the project folder directory

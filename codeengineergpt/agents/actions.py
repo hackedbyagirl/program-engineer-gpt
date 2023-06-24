@@ -29,3 +29,7 @@ class Actions:
             messages = self.ai_agent.next_step(messages, clarification)
 
         return messages
+    
+    def gen_code(self, system_prompt, messages):
+        # Use the messages as the user prompt and the system prompt to call the next_step method of the AI agent
+        return self.ai_agent.next_step(messages, system_prompt)

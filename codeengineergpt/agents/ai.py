@@ -52,3 +52,12 @@ class AIAgent:
 
         return messages
 
+    def gen_system_prompt(self, msg):
+        return {"role": "system", "content": msg}
+
+    def gen_user_prompt(self, msg):
+        return {"role": "user", "content": msg}
+
+    def gen_assistant_prompt(self, msg):
+        return {"role": "assistant", "content": msg}
+
