@@ -2,17 +2,10 @@
 
 # Imports
 import re
-
 import questionary
 
 from questionary import Style, ValidationError, Validator
 
-from programengineergpt.core.analyzer import AnalyzeCode
-from programengineergpt.core.developer import Developer
-from programengineergpt.core.embedder import CodeEmbedder
-from programengineergpt.core.loader import CodeLoader
-from programengineergpt.utils.colors import Color
-from programengineergpt.utils.display import Display
 from programengineergpt.utils.input import get_project_description
 
 ## CLI Styler
@@ -27,7 +20,6 @@ custom_style = Style(
         ('answer', 'fg:#5F819D bold'),
     ]
 )
-
 
 class CLI(object):
     """
@@ -67,6 +59,9 @@ class CLI(object):
         """
         Handles required parameters for this Analyze Mode
         """
+        from programengineergpt.utils.colors import Color
+        from programengineergpt.utils.display import Display
+        
         Display.display_analyze_mode_description()
         method = questionary.rawselect(
             "Please select a method for how you would like to provide your code:",
@@ -94,6 +89,10 @@ class CLI(object):
         """
         Handles the Develop New Program mode
         """
+        from programengineergpt.utils.colors import Color
+        from programengineergpt.utils.display import Display
+        from programengineergpt.core.developer import Developer
+        
         Display.display_develop_mode_description()  # Display the description
 
         # Get Project Name
@@ -109,9 +108,6 @@ class CLI(object):
         # Initialize Developer
         Developer(project_description, project_name)
 
-        # Continue with the rest of your logic here using the developer instance
-
-
     def handle_url(self):
         """
         Gets URL and sends to loader
@@ -120,6 +116,8 @@ class CLI(object):
             self : Argument
 
         """
+        from programengineergpt.core.loader import CodeLoader
+        
         repo_url = questionary.text(
             "Please provide a link to an online code repository",
             instruction="\n  Please use the following format\n  https://github.com/username/repo\n\n  URL: ",
@@ -138,6 +136,7 @@ class CLI(object):
             self : Argument
 
         """
+        from programengineergpt.core.loader import CodeLoader
         dir_path = questionary.path(
             "Please provide the path to the code directory", only_directories=True, style=custom_style
         ).ask()
@@ -153,6 +152,8 @@ class CLI(object):
             self : Argument
 
         """
+        from programengineergpt.core.loader import CodeLoader
+        
         loader = CodeLoader()
         code_chunks = loader.load_current_directory()
         self.embed_new(code_chunks)
@@ -165,12 +166,8 @@ class CLI(object):
             self : Argument
 
         """
-        # Check for the ActiveLoop API key
-        # if not os.getenv('ACTIVELOOP_TOKEN'):
-        #    print("ActiveLoop API key not found. Please add it as an environment variable or to the .env file.")
-        #    return
+        from programengineergpt.core.analyzer import AnalyzeCode
 
-        # Prompt the user for their DeepLake username and hub name
         deeplake_info = questionary.prompt(
             [
                 {
@@ -201,12 +198,9 @@ class CLI(object):
             chunks : Argument
 
         """
-        # Check for the ActiveLoop API key
-        # if not os.getenv('ACTIVELOOP_TOKEN'):
-        #    print("ActiveLoop API key not found. Please add it as an environment variable or to the .env file.")
-        #    return
-
-        # Prompt the user for their DeepLake username and hub name
+        from programengineergpt.core.embedder import CodeEmbedder
+        from programengineergpt.core.analyzer import AnalyzeCode
+        
         deeplake_info = questionary.prompt(
             [
                 {
