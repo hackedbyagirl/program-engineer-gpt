@@ -6,7 +6,7 @@ from programengineergpt.utils.display import Display
 from programengineergpt.utils.cli import CLI
 
 
-class CodeEngineerGPT(object):
+class ProgramEngineerGPT(object):
     """
     An AI-powered tool designed to assist with a variety of coding tasks.
     This includes:
@@ -19,7 +19,7 @@ class CodeEngineerGPT(object):
     def __init__(self):
         """
         Main Entry point for the code
-        
+
         Args:
             self : Argument
 
@@ -33,7 +33,7 @@ class CodeEngineerGPT(object):
     def launch(self):
         """
         Launches the main interactive interface.
-        
+
         Args:
             self : Argument
 

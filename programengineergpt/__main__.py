@@ -1,17 +1,10 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # imports
-from programengineergpt.program_engineer import CodeEngineerGPT
+from programengineergpt.main import run
 
 
 ########################################################################
-def run():
-    """
-    Launches App
-    """
-    ca_gpt = CodeEngineerGPT()
-    ca_gpt.launch()
-
 
 if __name__ == "__main__":
     run()
