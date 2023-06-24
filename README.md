@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="" rel="noopener">
- <img width=400px height=400px src="https://github.com/hackedbyagirl/ProgramEngineerGPT/blob/main/imgs/kat.png" alt="Kat"></a>
+ <img width=400px height=400px src="https://github.com/hackedbyagirl/ProgramEngineerGPT/blob/main/imgs/kat.png" alt="Kitty Kitty Meow Moew"></a>
 </p>
 
 <div align="center">
@@ -48,18 +48,6 @@ These instructions will get you a copy of the project up and running for develop
 ### Setup
 Instructions on how to get ProgramEngineerGPT configured locally.
 
-Clone the repository
-```bash
-#Download Repo and Navigate to Directory
-git clone https://github.com/hackedbyagirl/ProgramEngineerGPt.git
-cd ProgramEngineerGPT
-```
-
-Install all the required packages
-```
-python3 -m pip install -r requirements.txt
-```
-
 Before running, it is important that you have the correct environmental variables set. 
 Setup required Environmental Variables. You can either change the `test.env` to `.env` and add the required environmental variables.
 
@@ -85,12 +73,44 @@ setx ACTIVELOOP_TOKEN <ACTIVELOOP_API_KEY>
 setx DEEPLAKE_ACCOUNT_NAME <DEEPLAKE_ACCOUNT_NAME>
 ```
 
+**pip package**
+```bash
+pip install pgpt
+```
+
+**local package**
+Clone the repository
+```bash
+#Download Repo and Navigate to Directory
+git clone https://github.com/hackedbyagirl/ProgramEngineerGPt.git
+cd ProgramEngineerGPT
+pip install -e .
+pgpt
+```
+
+**python program**
+Clone the repository
+```bash
+#Download Repo and Navigate to Directory
+git clone https://github.com/hackedbyagirl/ProgramEngineerGPt.git
+cd ProgramEngineerGPT
+```
+Install all the required packages
+```
+python3 -m pip install -r requirements.txt
+```
+
+
 ## Usage <a name="usage"></a>
 You can start using ProgramEngineerGPT by running the main script and selecting the mode of operation. Depending on the mode, you will be asked to provide further details such as the code repository URL or the project description.
 
 However, this program does depend on API keys so make sure to set them!
 
 ```bash
+# Python package
+pgpt
+
+# Python program
 python3 programengineergpt.py 
 ```
 
@@ -98,25 +118,25 @@ python3 programengineergpt.py
 ### Program Launch
 Main Program Home Screen
 
-![main](/imgs/pgpt.jpg)
+![main](https://github.com/hackedbyagirl/ProgramEngineerGPT/blob/main/imgs/pgpt.jpg)
 
 ### Analyze Mode
 Loading Code of Current Working Directory
 
-![cwd](/imgs/cwd.jpg)
+![cwd](https://github.com/hackedbyagirl/ProgramEngineerGPT/blob/main/imgs/cwd.jpg)
 
 Engaging in conversation about the code
 
-![chat](/imgs/chat.jpg)
+![chat](https://github.com/hackedbyagirl/ProgramEngineerGPT/blob/main/imgs/chat.jpg)
 
 ### Develop Mode
 Providing Developer Mode with a Project Description
 
-![dev](/imgs/dev-launch.jpg)
+![dev](https://github.com/hackedbyagirl/ProgramEngineerGPT/blob/main/imgs/dev-launch.jpg)
 
 Engaging with Developer AI Assistant
 
-![dev2](/imgs/dev-gen.jpg)
+![dev2](https://github.com/hackedbyagirl/ProgramEngineerGPT/blob/main/imgs/dev-gen.jpg)
 
 ## Contributing
 
