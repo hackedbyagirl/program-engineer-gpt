@@ -1,5 +1,5 @@
 
-<h2 align="center">ProgramEngineerGPT</h2>
+<h1 align="center">ProgramEngineerGPT</h1>
 
 <div align="center">
 
@@ -102,7 +102,7 @@ Providing Developer Mode with a Project Description
 ![dev](/imgs/dev-launch.jpg)
 
 Engaging with Developer AI Assistant
-![dev2](/imgs/dev-dev.jpg)
+![dev2](/imgs/dev-gen.jpg)
 
 ## Contributing
 
