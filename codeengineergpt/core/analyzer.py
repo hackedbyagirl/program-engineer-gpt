@@ -43,7 +43,7 @@ class AnalyzeCode:
                 break
             Color.print("\n{B}Answer:\n")
             answer = self.ask_question(question)
-            Color.print("{W}" + answer)
+            #Color.print("{W}" + answer)
     
     def ask_question(self, question):
         '''

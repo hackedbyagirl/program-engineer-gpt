@@ -9,6 +9,7 @@ from questionary import Style, ValidationError, Validator
 from codeengineergpt.core.analyzer import AnalyzeCode
 from codeengineergpt.core.embedder import CodeEmbedder
 from codeengineergpt.core.loader import CodeLoader
+from codeengineergpt.core.developer import Developer
 from codeengineergpt.utils.colors import Color
 from codeengineergpt.utils.display import Display
 from codeengineergpt.utils.input import get_project_description
@@ -104,11 +105,10 @@ class CLI(object):
         Color.print("\n\n{P}Project Description:\n")
         project_description = get_project_description()
 
-        Color.print("\n\n{Y}Project Name:")
-        Color.print("{L}" + project_name)
+        # Initialize Developer
+        developer = Developer(project_description, project_name)
 
-        Color.print("\n\n{Y}Project Description:")
-        Color.print("{L}" + project_description)
+        # Continue with the rest of your logic here using the developer instance
 
 
     def handle_url(self):
