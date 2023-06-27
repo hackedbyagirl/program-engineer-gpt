@@ -31,13 +31,21 @@ ProgramEngineerGPT is an AI-powered tool designed to assist developers with code
 - Analyze Mode
 - Develop Mode.
 
-**Analyze Mode**
+### Analyze Mode
 
 In the 'Analyze' mode, ProgramEngineerGPT will thoroughly examine a provided code repository. You will be engaged in an interactive chat session where you can pose queries about the codebase. This could include questions about its structure, dependencies, functions, or any other aspect. The AI will respond with insights, helping you gain a deeper understanding of the code repository and how it funtions.
 
-**Develop Mode**
+### Develop Mode
 
 In the 'Develop' mode, ProgramEngineerGPT can assist you in setting up a new coding project. This includes planning the project structure, setting up the development environment, and other setup tasks. You will enter an interactive session where you will provide a project description of the program/project you want to create. After you provide a project description, the AI system will ask further questions to gather more information about your project. Your responses will guide the AI in providing the best assistance for your project.
+
+**Features:**
+- `Setup a Coding Project`: ProgramEngineerGPT can help you set up a new coding project, including planning the project structure and setting up the development environment.
+- `Gathers Program Requirements and Architecture`: It can ask you questions about your project to gather more information and understand your project requirements and desired architecture.
+- `Creates a Project Directory Structure`: Based on your project requirements, ProgramEngineerGPT can create a suitable directory structure for your project.
+- `Generates Initial Code`: It can generate initial code for your project based on the gathered requirements and architecture.
+- `Generates Unit Testing`: ProgramEngineerGPT can generate unit tests for your code to ensure its correctness and robustness.
+- `Generates Code Documentation`: It can generate documentation for your code base, making it easier for others to understand and contribute to your project.
 
 ## Getting Started <a name = "getting_started"></a>
 These instructions will get you a copy of the project up and running for development and testing purposes.
