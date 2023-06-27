@@ -7,6 +7,10 @@ from programengineergpt.agents.actions import Actions
 from programengineergpt.agents.ai import AIAgent
 from programengineergpt.prompts.intro import INTRO_SYSTEM_PROMPT
 from programengineergpt.prompts.setup_project import PROJECT_SETUP
+from programengineergpt.prompts.project_reqs import PROJECT_REQS
+from programengineergpt.prompts.project_design import PROJECT_DESIGN
+from programengineergpt.prompts.code_design import CODE_DESIGN
+from programengineergpt.prompts.code_writer import CODE_WRITER
 from programengineergpt.utils.colors import Color
 from programengineergpt.utils.display import Display
 
@@ -35,18 +39,29 @@ class Developer:
         Color.print("\n{L}Analyzing your project...\n")
         actions = Actions(self.ai_agent)
 
-        # Launch the AI agent and call the start method
-        system_prompt = INTRO_SYSTEM_PROMPT
+        # Launch the AI agent and begin project requirements
+        system_prompt = PROJECT_REQS
         user_prompt = self.project_description
         messages = self.ai_agent.launch(system_prompt, user_prompt)
 
         # Get user clarification response
         messages = actions.clarify(messages)
 
-        # Move to the first code generation phase
-        system_prompt = PROJECT_SETUP
-        messages = actions.gen_code(system_prompt, messages)
+        # Get Project requirements
+        Display.clear_screen()
+        system_prompt = PROJECT_DESIGN
+        messages = actions.gen_design(system_prompt, messages)
+        messages = actions.clarify(messages)
 
+        # Move to the code strucuture setup
+        Display.clear_screen()
+        system_prompt = CODE_DESIGN
+        messages = actions.gen_code_structure(system_prompt, messages)
+
+        # Write Initial Code
+        #Display.clear_screen()
+        system_prompt = CODE_WRITER
+        messages = actions.gen_code_structure(system_prompt, messages)
 
     def write_output(self):
         # Save the user project input into the project folder directory
