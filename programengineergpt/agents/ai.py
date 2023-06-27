@@ -61,4 +61,5 @@ class AIAgent:
 
     def gen_assistant_prompt(self, msg):
         return {"role": "assistant", "content": msg}
+    
 

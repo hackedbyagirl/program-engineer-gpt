@@ -19,7 +19,7 @@ class Developer:
             os.makedirs(project_folder)
 
         # Save project descrition
-        self.write_output()
+        self.write_output(file_name='project_instructions.txt', content=self.project_description)
 
         # Initialize an AI agent
         self.ai_agent = AIAgent()
@@ -39,7 +39,8 @@ class Developer:
         code_structure = self.process_code_structure(design)
         initial_code = self.write_initial_code(code_structure)
         unit_tests = self.write_unit_tests(initial_code)
-        self.write_code_documentation(unit_tests)
+        final = self.write_code_documentation(unit_tests)
+        self.save_chat_history(messages=final)
 
     def process_project_requirements(self):
         from programengineergpt.prompts.project_reqs import PROJECT_REQS
@@ -82,8 +83,15 @@ class Developer:
         system_prompt = DOCUMENTATION_WRITER
         return self.actions.gen_doumentaion(system_prompt, code)
 
-    def write_output(self):
+    def write_output(self, file_name, content):
         # Save the user project input into the project folder directory
-        with open(os.path.join(self.project_folder, 'project_instructions.txt'), 'w') as f:
-            f.write(self.project_description)
+        with open(os.path.join(self.project_folder, file_name), 'w') as f:
+            f.write(content)
+
+    def save_chat_history(self, messages):
+        with open(os.path.join(self.project_folder, 'chat_history.txt'), 'w') as f:
+            for message in messages:
+                if message['role'] == 'assistant':
+                    f.write(f"{message['content']}\n")
+
 
