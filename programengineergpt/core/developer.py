@@ -37,7 +37,9 @@ class Developer:
         reqs = self.process_project_requirements()
         design = self.process_project_design(reqs)
         code_structure = self.process_code_structure(design)
-        self.write_initial_code(code_structure)
+        initial_code = self.write_initial_code(code_structure)
+        unit_tests = self.write_unit_tests(initial_code)
+        self.write_code_documentation(unit_tests)
 
     def process_project_requirements(self):
         from programengineergpt.prompts.project_reqs import PROJECT_REQS
@@ -68,6 +70,17 @@ class Developer:
         system_prompt = CODE_WRITER
         return self.actions.gen_code_structure(system_prompt, structure)
     
+    def write_unit_tests(self, code):
+        from programengineergpt.prompts.code_tests import UNIT_TEST_GENERATOR
+
+        system_prompt = UNIT_TEST_GENERATOR
+        return self.actions.gen_unit_tests(system_prompt, code)
+
+    def write_code_documentation(self, code):
+        from programengineergpt.prompts.project_documentation import DOCUMENTATION_WRITER
+
+        system_prompt = DOCUMENTATION_WRITER
+        return self.actions.gen_doumentaion(system_prompt, code)
 
     def write_output(self):
         # Save the user project input into the project folder directory

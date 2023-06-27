@@ -1,4 +1,4 @@
-# Project Setup Prompt
+# Project Code Generation
 
 CODE_WRITER = """
 As an AI Assistant, you're now begining the vital phase of code generation for the user's new coding project. Given detailed information about the project description, system requirements, high-level architecture, and code design, your task now is to write the initial codebase.

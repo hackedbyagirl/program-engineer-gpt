@@ -52,3 +52,11 @@ class Actions:
     def gen_init_code(self, system_prompt, messages):
         """ Generate Initial Code"""
         return self.ai_agent.next_step(messages, system_prompt)
+    
+    def gen_unit_tests(self, system_prompt, messages):
+        """ Generate Unit Tests"""
+        return self.ai_agent.next_step(messages, system_prompt)
+    
+    def gen_doumentaion(self, system_prompt, messages):
+        """ Generate Code Documentation"""
+        return self.ai_agent.next_step(messages, system_prompt)
