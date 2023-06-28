@@ -37,9 +37,11 @@ class Developer:
         reqs = self.process_project_requirements()
         design = self.process_project_design(reqs)
         code_structure = self.process_code_structure(design)
-        initial_code = self.write_initial_code(code_structure)
+        deps = self.verify_requirements(code_structure)
+        initial_code = self.write_initial_code(deps)
         unit_tests = self.write_unit_tests(initial_code)
-        final = self.write_code_documentation(unit_tests)
+        deps_file = self.generate_dependencies(unit_tests)
+        final = self.write_code_documentation(deps_file)
         self.save_chat_history(messages=final)
 
     def process_project_requirements(self):
@@ -65,11 +67,24 @@ class Developer:
         system_prompt = CODE_DESIGN
         return self.actions.gen_code_structure(system_prompt, design)
 
+    def verify_requirements(self, code):
+        from programengineergpt.prompts.code_requirements import VERIFY_CODE_REQS
+
+        #Display.clear_screen()
+        system_prompt = VERIFY_CODE_REQS
+        messages = self.actions.gen_deps(system_prompt, code)
+        return self.actions.verify_deps(messages)
+    
     def write_initial_code(self, structure):
         from programengineergpt.prompts.code_writer import CODE_WRITER
         
         system_prompt = CODE_WRITER
         return self.actions.gen_code_structure(system_prompt, structure)
+    
+    def generate_dependencies(self, code):
+        from programengineergpt.prompts.code_dependencies import SETUP_CODE_DEPS
+        system_prompt = SETUP_CODE_DEPS
+        return self.actions.gen_deps(system_prompt, code)
     
     def write_unit_tests(self, code):
         from programengineergpt.prompts.code_tests import UNIT_TEST_GENERATOR

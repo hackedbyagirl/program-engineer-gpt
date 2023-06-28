@@ -11,15 +11,13 @@ Then, you will provide the user with a comprehensive description of each file in
 
 The following tokens must be replaced as follows.
 
-DIR_STRUCTURE: A markdown codeblock representing the directory structure layout
-F_DESCRIPTIONS: A comprehensive description of each file in the project 
+FILE: The name of the markdown file that represents the directory design
+DIR_STRUCTURE: A markdown codeblock representing the directory structure layout followed by a comprehensive description of each file in the project 
 
 Expected Output:
-Based on the project description, system requirements, and architecture, the initial layout of your Python project should be setup as followed:
 
-Directory Structure:
+FILE
+```
 DIR_STRUCTURE
-
-File Descriptions: 
-F_DESCRIPTIONS
+```
 """

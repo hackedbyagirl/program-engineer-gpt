@@ -1,0 +1,5 @@
+I want to develop a python program that creates a microsoft word update document. This program should ask the user a series of questions to help prepare the document. The document should include:
+- What tasks they are working on this week
+- The status of the project
+- The value added by doing the task 
+- their weekly accomplishments

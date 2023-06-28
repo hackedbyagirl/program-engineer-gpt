@@ -49,6 +49,29 @@ class Actions:
         """ Launch Project Code Development Phase"""
         return self.ai_agent.next_step(messages, system_prompt)
 
+    def gen_deps(self, system_prompt, messages):
+        """ Get Project Dependencies """
+        return self.ai_agent.next_step(messages, system_prompt)
+
+    
+    def verify_deps(self, messages):
+        """ Perform dependency verification """
+        while True:
+            # Ask the user if they want to clarify anything
+            print("\n")
+            Color.print("\n{B}Please provide dependency clarification. If everything is sufficient, please type 'n/a':")
+            clarification = input()
+
+            if clarification == "n/a":
+                msg = "All requirements are sufficient"
+                messages = self.ai_agent.next_step(messages, msg)
+                break
+
+            # Pass the user's clarification to the AI for further processing
+            messages = self.ai_agent.next_step(messages, clarification)
+            
+        return messages
+    
     def gen_init_code(self, system_prompt, messages):
         """ Generate Initial Code"""
         return self.ai_agent.next_step(messages, system_prompt)

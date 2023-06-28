@@ -1,0 +1,186 @@
+
+
+F_DESCRIPTIONS:
+1. main.py: This file serves as the entry point of the program. It contains the main function that is responsible for handling user input and invoking the appropriate functions based on the user's choice.
+2. document.py: This file contains the Document class, which encapsulates the logic for creating and updating Microsoft Word documents. It provides methods for creating a new document, uploading and adding additional information to an existing document.
+3. word_utils.py: This file contains utility functions that are used by the Document class to interact with the python-docx library. It includes functions for creating paragraphs, adding text to paragraphs, and saving the document.
+4. cli.py: This file contains the CommandLineInterface class, which handles the command line interface for user interaction. It provides methods for displaying the menu options, capturing user input, and invoking the appropriate functions based on the user's choice.
+
+
+main.py
+```python
+import click
+from document import Document
+
+@click.command()
+def main():
+    document = Document()
+    while True:
+        click.clear()
+        click.echo("1. Create a new document")
+        click.echo("2. Upload and add additional information to an existing document")
+        click.echo("3. Exit")
+        choice = click.prompt("Enter your choice", type=int)
+        if choice == 1:
+            document.create_document()
+        elif choice == 2:
+            document.upload_and_add_information()
+        elif choice == 3:
+            break
+        else:
+            click.echo("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
+```
+
+document.py
+```python
+from docx import Document as WordDocument
+from word_utils import create_paragraph, add_text_to_paragraph, save_document
+
+class Document:
+    def __init__(self):
+        self.document = WordDocument()
+
+    def create_document(self):
+        # Prompt the user for the necessary information to create a new document
+        tasks = input("Enter the tasks you are working on this week: ")
+        status = input("Enter the status of the project: ")
+        value_added = input("Enter the value added by doing the task: ")
+        accomplishments = input("Enter your weekly accomplishments: ")
+
+        # Create paragraphs and add text to them
+        tasks_paragraph = create_paragraph(self.document)
+        add_text_to_paragraph(tasks_paragraph, "Tasks: " + tasks)
+
+        status_paragraph = create_paragraph(self.document)
+        add_text_to_paragraph(status_paragraph, "Status: " + status)
+
+        value_added_paragraph = create_paragraph(self.document)
+        add_text_to_paragraph(value_added_paragraph, "Value Added: " + value_added)
+
+        accomplishments_paragraph = create_paragraph(self.document)
+        add_text_to_paragraph(accomplishments_paragraph, "Accomplishments: " + accomplishments)
+
+        # Save the document
+        save_document(self.document)
+
+    def upload_and_add_information(self):
+        # Prompt the user for the necessary information to add to an existing document
+        file_path = input("Enter the path of the existing document: ")
+        additional_information = input("Enter the additional information to add: ")
+
+        # Open the existing document
+        existing_document = WordDocument(file_path)
+
+        # Create a new paragraph and add the additional information
+        additional_information_paragraph = create_paragraph(existing_document)
+        add_text_to_paragraph(additional_information_paragraph, additional_information)
+
+        # Save the modified document
+        save_document(existing_document, file_path)
+```
+
+word_utils.py
+```python
+from docx import Document as WordDocument
+
+def create_paragraph(document):
+    return document.add_paragraph()
+
+def add_text_to_paragraph(paragraph, text):
+    paragraph.add_run(text)
+
+def save_document(document, file_path=None):
+    if file_path:
+        document.save(file_path)
+    else:
+        document.save("output.docx")
+```
+
+cli.py
+```python
+import click
+
+class CommandLineInterface:
+    def __init__(self):
+        pass
+
+    def display_menu(self):
+        click.echo("1. Create a new document")
+        click.echo("2. Upload and add additional information to an existing document")
+        click.echo("3. Exit")
+
+    def get_user_choice(self):
+        return click.prompt("Enter your choice", type=int)
+```
+
+test_document.py
+```python
+import pytest
+from docx import Document as WordDocument
+from document import Document
+
+@pytest.fixture
+def document():
+    return Document()
+
+def test_create_document(document, mocker):
+    mocker.patch("builtins.input", side_effect=["Task 1", "In progress", "Increased efficiency", "Completed task 1"])
+    mocker.patch("word_utils.save_document")
+
+    document.create_document()
+
+    assert len(document.document.paragraphs) == 4
+    assert document.document.paragraphs[0].text == "Tasks: Task 1"
+    assert document.document.paragraphs[1].text == "Status: In progress"
+    assert document.document.paragraphs[2].text == "Value Added: Increased efficiency"
+    assert document.document.paragraphs[3].text == "Accomplishments: Completed task 1"
+    word_utils.save_document.assert_called_once_with(document.document)
+
+def test_upload_and_add_information(document, mocker):
+    mocker.patch("builtins.input", side_effect=["existing.docx", "Additional information"])
+    mocker.patch("word_utils.save_document")
+
+    document.upload_and_add_information()
+
+    assert len(document.document.paragraphs) == 1
+    assert document.document.paragraphs[0].text == "Additional information"
+    word_utils.save_document.assert_called_once_with(document.document, "existing.docx")
+```
+
+test_word_utils.py
+```python
+from docx import Document as WordDocument
+from word_utils import create_paragraph, add_text_to_paragraph, save_document
+
+def test_create_paragraph():
+    document = WordDocument()
+    paragraph = create_paragraph(document)
+    assert len(document.paragraphs) == 1
+    assert paragraph == document.paragraphs[0]
+
+def test_add_text_to_paragraph():
+    document = WordDocument()
+    paragraph = create_paragraph(document)
+    add_text_to_paragraph(paragraph, "Test text")
+    assert paragraph.runs[0].text == "Test text"
+
+def test_save_document(tmp_path):
+    document = WordDocument()
+    paragraph = create_paragraph(document)
+    add_text_to_paragraph(paragraph, "Test text")
+    save_document(document, str(tmp_path / "test.docx"))
+    assert (tmp_path / "test.docx").exists()
+```
+
+Please review the unit tests and ensure that all key parts of the software are tested. Let me know if there is anything else I can assist you with.
+Installation commands:
+```
+pip install python-docx
+pip install click
+pip install docxtpl
+```
+
+
