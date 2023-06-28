@@ -126,7 +126,7 @@ class CLI(object):
         ).ask()
         loader = CodeLoader()
         code_chunks = loader.load_online_repo(repo_url)
-        self.embed_new(code_chunks)
+        #self.embed_new(code_chunks)
 
     def handle_path(self):
         """
@@ -142,7 +142,11 @@ class CLI(object):
         ).ask()
         loader = CodeLoader()
         code_chunks = loader.load_directory(dir_path)
-        self.embed_new(code_chunks)
+        #
+        embedder = CodeEmbedder()
+        for chunk in code_chunks:
+            embedder.embed_code(chunk)
+            loader.load_to_chroma()
 
     def handle_cwd(self):
         """
@@ -152,11 +156,14 @@ class CLI(object):
             self : Argument
 
         """
+        from programengineergpt.core.analyzer import AnalyzeCode
+        from programengineergpt.core.chatbot import ChatBot
         from programengineergpt.core.loader import CodeLoader
         
         loader = CodeLoader()
-        code_chunks = loader.load_current_directory()
-        self.embed_new(code_chunks)
+        vector_store = loader.load_current_directory()
+        analyzer = ChatBot(vector_store)
+        analyzer.interact()
 
     def handle_existing(self):
         """
@@ -166,7 +173,7 @@ class CLI(object):
             self : Argument
 
         """
-        from programengineergpt.core.analyzer import AnalyzeCode
+        from programengineergpt.core.analyzer2 import AnalyzeCode
 
         deeplake_info = questionary.prompt(
             [
@@ -199,7 +206,7 @@ class CLI(object):
 
         """
         from programengineergpt.core.embedder import CodeEmbedder
-        from programengineergpt.core.analyzer import AnalyzeCode
+        from programengineergpt.core.analyzer2 import AnalyzeCode
         
         deeplake_info = questionary.prompt(
             [

@@ -1,5 +1,5 @@
 
-from programengineergpt.core.analyzer import AnalyzeCode
+from programengineergpt.core.analyzer2 import AnalyzeCode
 from programengineergpt.core.developer import Developer
 from programengineergpt.core.embedder import CodeEmbedder
 from programengineergpt.core.loader import CodeLoader

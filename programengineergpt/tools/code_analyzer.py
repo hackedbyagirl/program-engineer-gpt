@@ -11,7 +11,7 @@ from langchain.callbacks.manager import (
 from langchain.tools import BaseTool
 from pydantic import BaseModel, Field
 
-from ..core.analyzer import AnalyzeCode
+from ..core.analyzer2 import AnalyzeCode
 
 
 # Define the input schema for the tool
