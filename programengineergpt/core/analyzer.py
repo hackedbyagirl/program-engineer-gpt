@@ -49,7 +49,7 @@ class AnalyzeCode:
         '''
         Ask Questions about your code
         '''
-        context = self.retrieve_code(question)
+        context = self.retrieve_context(question)
         if not context:
             return "I couldn't find any relevant code."
         
@@ -60,9 +60,27 @@ class AnalyzeCode:
 
     def retrieve_code(self, query):
         """ Use ChromaDB to retrieve relevant code based on the query """
-        results = self.code_collection.query(query_texts=[query], include=['documents', 'distances'], n_results=3)
+        results = self.code_collection.query(query_texts=[query], include=['documents', 'distances', 'metadatas'], n_results=3)
         if results:
-            print(results)
+            print(len(results['documents'][0]))
+            print(len(results['metadatas'][0]))
+
             return results
         else:
             return None  
+        
+    def retrieve_context(self, query):
+        from programengineergpt.prompts.build_chat_prompt import build_user_prompt
+        
+        results = self.code_collection.query(query_texts=[query], include=['documents', 'metadatas'], n_results=3)
+        if results:
+            documents = results['documents'][0]
+            metadatas = results['metadatas'][0]
+            references = []
+            for doc, meta in zip(documents, metadatas):
+                references.append((doc, meta['filename']))
+            prompt = build_user_prompt(query, references)
+            print(prompt)
+            return results
+        else:
+            return None

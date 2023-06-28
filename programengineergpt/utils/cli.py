@@ -162,7 +162,8 @@ class CLI(object):
         
         loader = CodeLoader()
         vector_store = loader.load_current_directory()
-        analyzer = ChatBot(vector_store)
+        #analyzer = ChatBot(vector_store)
+        analyzer = AnalyzeCode(vector_store)
         analyzer.interact()
 
     def handle_existing(self):
