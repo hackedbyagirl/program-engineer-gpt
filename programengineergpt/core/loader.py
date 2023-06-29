@@ -121,6 +121,10 @@ class CodeLoader:
                     counter += 1
             code_collection.add(ids=ids, documents=documents, metadatas=metadatas)
 
+        if os.path.exists("temp_repo"):
+            Color.print('{G}Step 5: {W}Removing "temp_repo" contents')
+            os.system("rm -rf temp_repo")
+
         return code_collection
 
     def split_code(self):
@@ -130,3 +134,11 @@ class CodeLoader:
             chunks = [code[i : i + 1000] for i in range(0, len(code), 1000)]
             all_chunks.append((filename, chunks))
         return all_chunks
+
+    def remove_temp_dir(self):
+        """
+        Remove 'temp_repo' if a repository was cloned
+        """
+        if os.path.exists("temp_repo"):
+            Color.print('{G}Step 5: {W}Removing "temp_repo" contents')
+            os.system("rm -rf temp_repo")
