@@ -92,5 +92,7 @@ class Color(object):
         """
         error_style = fg(1) + attr(1)
         msg_style = fg(15) + attr(0)
-        error_message = f"{stylize('Error:', error_style)} {stylize(str(error), msg_style)}"
+        error_message = (
+            f"{stylize('Error:', error_style)} {stylize(str(error), msg_style)}"
+        )
         print(error_message)

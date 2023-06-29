@@ -16,14 +16,14 @@ class AIAgent:
             openai.Model.retrieve(self.model)
         except openai.InvalidRequestError:
             print(
-                f"Model {self.model} not available for provided API key. Please Update your configuration file")
-
+                f"Model {self.model} not available for provided API key. Please Update your configuration file"
+            )
 
     def launch(self, system_prompt, user_prompt):
         # Create a list of two dictionaries representing a system role and a user role
         msg = [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt}
+            {"role": "user", "content": user_prompt},
         ]
 
         # Send the message to the next method
@@ -61,4 +61,3 @@ class AIAgent:
 
     def gen_assistant_prompt(self, msg):
         return {"role": "assistant", "content": msg}
-

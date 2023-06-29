@@ -2,6 +2,7 @@
 
 # Imports
 
+
 def get_project_description():
     lines = []
     try:
@@ -10,5 +11,5 @@ def get_project_description():
             lines.append(line)
     except EOFError:
         pass
-    results = '\n'.join(lines)
+    results = "\n".join(lines)
     return results

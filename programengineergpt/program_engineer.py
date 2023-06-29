@@ -38,6 +38,6 @@ class ProgramEngineerGPT(object):
 
         """
         from programengineergpt.utils.cli import CLI
-        
+
         app = CLI()
         app.launc_main_cli()

@@ -12,30 +12,34 @@ from programengineergpt.utils.colors import Color
 ## CLI Styler
 custom_style = Style(
     [
-        ('separator', 'fg:#6C6C6C'),
-        ('qmark', 'fg:#FF9D00 bold'),
-        ('question', 'bold'),
-        ('selected', 'fg:#5F819D'),
-        ('pointer', 'fg:#FF9D00 bold'),
-        ('choice', 'fg:#FF9D00 bold'),
-        ('answer', 'fg:#5F819D bold'),
+        ("separator", "fg:#6C6C6C"),
+        ("qmark", "fg:#FF9D00 bold"),
+        ("question", "bold"),
+        ("selected", "fg:#5F819D"),
+        ("pointer", "fg:#FF9D00 bold"),
+        ("choice", "fg:#FF9D00 bold"),
+        ("answer", "fg:#5F819D bold"),
     ]
 )
+
 
 class CLI(object):
     """
     Initial CLI
     """
+
     def __init__(self):
-        """ Init Class  """
-        self.mode = ''
+        """Init Class"""
+        self.mode = ""
 
     def launc_main_cli(self):
-        """ Launch main CLI """
+        """Launch main CLI"""
 
         while True:
             self.mode = questionary.rawselect(
-                "Select Mode:", choices=["Analyze", "Develop", "Exit"], style=custom_style
+                "Select Mode:",
+                choices=["Analyze", "Develop", "Exit"],
+                style=custom_style,
             ).ask()
 
             if self.mode == "Exit":
@@ -52,7 +56,7 @@ class CLI(object):
         Handles required parameters for this Analyze Mode
         """
         from programengineergpt.utils.display import Display
-        
+
         Display.display_analyze_mode_description()
         method = questionary.rawselect(
             "Please select a method for how you would like to provide your code:",
@@ -73,7 +77,7 @@ class CLI(object):
         elif method == "Current directory":
             self.handle_cwd()
 
-        #elif method == "Local Index":
+        # elif method == "Local Index":
         #    self.handle_existing()
 
     def handle_develop_mode(self):
@@ -82,7 +86,7 @@ class CLI(object):
         """
         from programengineergpt.utils.display import Display
         from programengineergpt.core.developer import Developer
-        
+
         Display.display_develop_mode_description()  # Display the description
 
         # Get Project Name
@@ -90,7 +94,9 @@ class CLI(object):
         project_name = input("Project Folder: ")
 
         # Get project Description
-        Color.print("\n{B}Step 2: {W}Please provide a description for your new project. Feel free to provide as much detail as possible about your project.You are able to enter multiple lines using the 'ENTER' button.")
+        Color.print(
+            "\n{B}Step 2: {W}Please provide a description for your new project. Feel free to provide as much detail as possible about your project.You are able to enter multiple lines using the 'ENTER' button."
+        )
         Color.print("{Y}NOTE: {W}Use Ctrl-D (or Ctrl-Z on Windows) when finished.")
         Color.print("\n\n{P}Project Description:\n")
         project_description = get_project_description()
@@ -108,7 +114,7 @@ class CLI(object):
         """
         from programengineergpt.agents.chatbot import ChatBot
         from programengineergpt.core.loader import CodeLoader
-        
+
         repo_url = questionary.text(
             "Please provide a link to an online code repository",
             instruction="\n  Please use the following format\n  https://github.com/username/repo\n\n  URL: ",
@@ -130,7 +136,9 @@ class CLI(object):
         from programengineergpt.core.loader import CodeLoader
 
         dir_path = questionary.path(
-            "Please provide the path to the code directory", only_directories=True, style=custom_style
+            "Please provide the path to the code directory",
+            only_directories=True,
+            style=custom_style,
         ).ask()
 
         loader = CodeLoader()
@@ -144,7 +152,7 @@ class CLI(object):
         """
         from programengineergpt.agents.chatbot import ChatBot
         from programengineergpt.core.loader import CodeLoader
-        
+
         loader = CodeLoader()
         vector_store = loader.load_current_directory()
         chatbot = ChatBot(vector_store)
@@ -159,7 +167,7 @@ class CLI(object):
 
         Color.print("\n{Y}Please enter collection name for code base: ")
         col_name = input("Collection Name: ")
-        
+
         index_retriever = Retriever(col_name)
         vector_store = index_retriever.retrive_code_index()
         chatbot = ChatBot(vector_store)
@@ -167,9 +175,9 @@ class CLI(object):
 
 
 class URLValidator(Validator):
-    '''
+    """
     Validate URL for Input
-    '''
+    """
 
     def validate(self, document):
         """
@@ -178,7 +186,9 @@ class URLValidator(Validator):
             document : Argument
 
         """
-        url_pattern = re.compile(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
+        url_pattern = re.compile(
+            r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+"
+        )
         if not url_pattern.match(document.text):
             raise ValidationError(
                 message="Please enter a valid URL", cursor_position=len(document.text)

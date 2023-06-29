@@ -9,6 +9,7 @@ from programengineergpt.utils.display import Display
 from programengineergpt.prompts.build_user_prompt import build_user_prompt
 from programengineergpt.prompts.chat import SYSTEM_CHAT_PROMPT
 
+
 class ChatBot:
     def __init__(self, code_collection):
         self.code_collection = code_collection
@@ -36,14 +37,13 @@ class ChatBot:
         # Launch first question
         self.next_step(self.chat_history)
 
-    
     def interact(self):
-        '''
+        """
         Queries an index to allow conversational QA
-        '''
+        """
         # Launch initial ai interaction
         self.launch()
-        
+
         # Engage in Interactive chat loop
         while True:
             # Get question
@@ -52,7 +52,7 @@ class ChatBot:
             if question.lower() == "exit":
                 break
 
-            # Build user prompt 
+            # Build user prompt
             context = self.retrieve_context(question)
             user_prompt = build_user_prompt(question, context)
             self.chat_history.append(user_prompt)
@@ -60,21 +60,23 @@ class ChatBot:
             # continue chat
             self.next_step(self.chat_history)
 
-
     def retrieve_context(self, query):
-        results = self.code_collection.query(query_texts=[query], include=['documents', 'metadatas'], n_results=3)
+        results = self.code_collection.query(
+            query_texts=[query], include=["documents", "metadatas"], n_results=3
+        )
         if results:
-            return [(doc, meta['filename']) for doc, meta in zip(results['documents'][0], results['metadatas'][0])]
+            return [
+                (doc, meta["filename"])
+                for doc, meta in zip(results["documents"][0], results["metadatas"][0])
+            ]
         else:
             return None
 
-    
     def next_step(self, messages):
         max_retry = 7
         retry = 0
         while True:
             try:
-
                 response = self.openai_api.create(
                     model=self.model,
                     messages=messages,
@@ -91,20 +93,20 @@ class ChatBot:
                     chat.append(msg)
                 print()
 
-                self.chat_history.append({"role": "assistant", "content": "".join(chat)})
+                self.chat_history.append(
+                    {"role": "assistant", "content": "".join(chat)}
+                )
                 break
-            
-            except Exception as oops:
-                    print(f'\n\nError communicating with OpenAI: "{oops}"')
-                    if 'maximum context length' in str(oops):
-                        self.chat_history.pop(0)
-                        print('\n\n DEBUG: Trimming oldest message')
-                        continue
-                    retry += 1
-                    if retry >= max_retry:
-                        print(f"\n\nExiting due to excessive errors in API: {oops}")
-                        exit(1)
-                    print(f'\n\nRetrying in {2 ** (retry - 1) * 5} seconds...')
-                    sleep(2 ** (retry - 1) * 5)
-    
 
+            except Exception as oops:
+                print(f'\n\nError communicating with OpenAI: "{oops}"')
+                if "maximum context length" in str(oops):
+                    self.chat_history.pop(0)
+                    print("\n\n DEBUG: Trimming oldest message")
+                    continue
+                retry += 1
+                if retry >= max_retry:
+                    print(f"\n\nExiting due to excessive errors in API: {oops}")
+                    exit(1)
+                print(f"\n\nRetrying in {2 ** (retry - 1) * 5} seconds...")
+                sleep(2 ** (retry - 1) * 5)

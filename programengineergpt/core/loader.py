@@ -11,7 +11,7 @@ class CodeLoader:
     def __init__(self):
         self.embedding_function = OpenAIEmbeddingFunction()
         self.chromadb_client = chromadb.Client()
-        
+
         self.code_files = []
         self.files = []
         self.chunks = []
@@ -63,7 +63,9 @@ class CodeLoader:
                 vector_store = self.load("temp_repo")
 
             except Exception as e:
-                Color.print("{R}!!!: {W}Failed to clone GitHub repository from {Y}" + url)
+                Color.print(
+                    "{R}!!!: {W}Failed to clone GitHub repository from {Y}" + url
+                )
                 Color.p_error(e)
 
         return vector_store
@@ -76,7 +78,7 @@ class CodeLoader:
         Color.print("{G}Step 1: {W}Retrieving Code from Local Repository")
         if not os.path.isdir(path):
             raise Exception(f"Invalid local directory: {path}")
-        
+
         vector_store = self.load(path)
         return vector_store
 
@@ -87,7 +89,7 @@ class CodeLoader:
         Color.print("{G}Step 1: {W}Retrieving Code from Current Directory")
         vector_store = self.load(os.getcwd())
         return vector_store
-    
+
     def load(self, root_dir, col_name=None):
         """
         Load all code files from the root directory.
@@ -99,9 +101,9 @@ class CodeLoader:
                 for file in filenames:
                     if file.split(".")[-1] in self.extensions:
                         full_path = os.path.join(dirpath, file)
-                        with open(full_path, 'r') as f:
+                        with open(full_path, "r") as f:
                             self.files.append((full_path, f.read()))
-                        
+
         except Exception as e:
             Color.print("{R}!!!: {W}Failed to load code files from {Y}" + root_dir)
             Color.p_error(e)
@@ -116,16 +118,18 @@ class CodeLoader:
 
         # embed code
         Color.print("{G}Step 4: {W}Embedding and Uploading to ChromaDB")
-        
+
         if col_name is None:
             Color.print("\n{Y}Please enter a Collection Name for you Code Base: ")
             col_name = input("Collection Name: ")
-        
-        code_collection = self.chromadb_client.create_collection(name=col_name, embedding_function=self.embedding_function)
-        
+
+        code_collection = self.chromadb_client.create_collection(
+            name=col_name, embedding_function=self.embedding_function
+        )
+
         batch_size = 100
         for i in range(0, len(self.chunks), batch_size):
-            batch = self.chunks[i:i+batch_size]
+            batch = self.chunks[i : i + batch_size]
             documents = []
             ids = []
             metadatas = []
@@ -133,12 +137,8 @@ class CodeLoader:
                 for j, chunk in enumerate(chunks):
                     documents.append(chunk)
                     ids.append(f"{full_path}_{j}")
-                    metadatas.append({'filename': full_path})
-            code_collection.add(
-                ids=ids,
-                documents=documents,
-                metadatas=metadatas
-            )
+                    metadatas.append({"filename": full_path})
+            code_collection.add(ids=ids, documents=documents, metadatas=metadatas)
 
         return code_collection
 
@@ -146,8 +146,6 @@ class CodeLoader:
         """Split the code of all files into chunks."""
         all_chunks = []
         for filename, code in self.files:
-            chunks = [code[i:i+1000] for i in range(0, len(code), 1000)]
+            chunks = [code[i : i + 1000] for i in range(0, len(code), 1000)]
             all_chunks.append((filename, chunks))
         return all_chunks
-
-

@@ -48,7 +48,7 @@ class Config(object):
 
     @classmethod
     def load_args(cls):
-        """ Sets configuration values based on Argument.args object """
+        """Sets configuration values based on Argument.args object"""
 
         args = Arguments(cls).args
 
@@ -66,11 +66,10 @@ class Config(object):
         # Get Environmental Variable
         load_dotenv()
         cls.openai_key = os.getenv("OPENAI_API_KEY")
-    
 
     @classmethod
     def exit(cls, code=0):
-        """ Exit Program """
+        """Exit Program"""
         print("Stopping program")
 
         exit(code)

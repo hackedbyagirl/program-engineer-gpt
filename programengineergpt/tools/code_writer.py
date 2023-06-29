@@ -19,12 +19,19 @@ class CodeWritingInput(BaseModel):
     username: str = Field(description="The username of the DeepLake account.")
     dataset_path: str = Field(description="The path to the dataset in DeepLake")
 
+
 class CodeWriterTool(BaseTool):
     name = "CodeWriter"
     description = "Generates code based on a provided task"
     args_schema: Type[BaseModel] = CodeWritingInput
 
-    def _run(self, task: str, username: str, dataset_path: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> str:
+    def _run(
+        self,
+        task: str,
+        username: str,
+        dataset_path: str,
+        run_manager: Optional[CallbackManagerForToolRun] = None,
+    ) -> str:
         """Use the tool."""
         # Initialize the OpenAI API with your API key
         openai = OpenAI(api_key="your-api-key")
@@ -47,9 +54,14 @@ class CodeWriterTool(BaseTool):
         )
 
         # Return the generated code
-        return response['choices'][0]['message']['content']
+        return response["choices"][0]["message"]["content"]
 
-    async def _arun(self, task: str, dataset_path: str, run_manager: Optional[AsyncCallbackManagerForToolRun] = None) -> str:
+    async def _arun(
+        self,
+        task: str,
+        dataset_path: str,
+        run_manager: Optional[AsyncCallbackManagerForToolRun] = None,
+    ) -> str:
         """Use the tool asynchronously."""
         # This would be similar to the _run method, but with async calls
         # For the sake of this example, we will just return a dummy string

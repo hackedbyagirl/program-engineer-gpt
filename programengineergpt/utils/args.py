@@ -7,10 +7,10 @@ from programengineergpt.utils.colors import Color
 
 
 class Arguments(object):
-    '''Holds arguments used by CodeAssistantGPT'''
+    """Holds arguments used by CodeAssistantGPT"""
 
     def __init__(self, configuration):
-        self.verbose = '-v' in sys.argv or '-hv' in sys.argv or '-vh' in sys.argv
+        self.verbose = "-v" in sys.argv or "-hv" in sys.argv or "-vh" in sys.argv
         self.config = configuration
         self.args = self.get_arguments()
 
@@ -21,7 +21,7 @@ class Arguments(object):
             return argparse.SUPPRESS
 
     def get_arguments(self):
-        '''Returns parser.args() containing all program arguments'''
+        """Returns parser.args() containing all program arguments"""
         parser = argparse.ArgumentParser(
             description="CodeAssistantGPT: An AI tool designed to assist with a variety of coding tasks."
         )
@@ -53,11 +53,11 @@ class Arguments(object):
         return parser.parse_args()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     from programengineergpt.config import Config
 
     Config.init()
     a = Arguments(Config)
     args = a.args
     for key, value in sorted(args.__dict__.items()):
-        Color.pl('{C}%s: {G}%s{W}' % (key.ljust(21), value))
+        Color.pl("{C}%s: {G}%s{W}" % (key.ljust(21), value))
