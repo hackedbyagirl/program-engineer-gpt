@@ -2,6 +2,8 @@
 
 import os
 import chromadb
+import fnmatch
+
 from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
 
 from programengineergpt.utils.colors import Color
@@ -94,15 +96,22 @@ class CodeLoader:
         """
         Load all code files from the root directory.
         """
+        # Read .gitignore and create a list of ignore patterns
+        ignore_patterns = []
+        with open('../../.gitignore', 'r') as f:
+            ignore_patterns = [line.strip() for line in f if not line.startswith('#') and line.strip() != '']
         # Gather files
         try:
             Color.print("{G}Step 2: {W}Loading Code for Indexing and Embedding")
             for dirpath, dirnames, filenames in os.walk(root_dir):
                 for file in filenames:
+                     # Check if file matches any ignore pattern
+                    if any(fnmatch.fnmatch(file, pattern) for pattern in ignore_patterns):
+                        continue  # Skip this file
+                        
                     if file.split(".")[-1] in self.extensions:
-                        full_path = os.path.join(dirpath, file)
-                        with open(full_path, "r") as f:
-                            self.files.append((full_path, f.read()))
+                        with open(os.path.join(dirpath, file), 'r') as f:
+                            self.files.append((file, f.read()))
 
         except Exception as e:
             Color.print("{R}!!!: {W}Failed to load code files from {Y}" + root_dir)
