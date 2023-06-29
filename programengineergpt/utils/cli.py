@@ -7,6 +7,7 @@ import questionary
 from questionary import Style, ValidationError, Validator
 
 from programengineergpt.utils.input import get_project_description
+from programengineergpt.utils.colors import Color
 
 ## CLI Styler
 custom_style = Style(
@@ -26,21 +27,12 @@ class CLI(object):
     Initial CLI
     """
     def __init__(self):
-        """
-        Args:
-            self : Argument
-
-        """
+        """ Init Class  """
         self.mode = ''
 
     def launc_main_cli(self):
-        """
-        Get mode
+        """ Launch main CLI """
 
-        Args:
-            self : Argument
-
-        """
         while True:
             self.mode = questionary.rawselect(
                 "Select Mode:", choices=["Analyze", "Develop", "Exit"], style=custom_style
@@ -59,13 +51,12 @@ class CLI(object):
         """
         Handles required parameters for this Analyze Mode
         """
-        from programengineergpt.utils.colors import Color
         from programengineergpt.utils.display import Display
         
         Display.display_analyze_mode_description()
         method = questionary.rawselect(
             "Please select a method for how you would like to provide your code:",
-            choices=["URL", "Directory Path", "Current directory", "Deeplake repo index", "Back"],
+            choices=["URL", "Directory Path", "Current directory", "Local Index", "Back"],
             style=custom_style,
         ).ask()
 
@@ -82,14 +73,13 @@ class CLI(object):
         elif method == "Current directory":
             self.handle_cwd()
 
-        elif method == "Deeplake repo index":
+        elif method == "Local Index":
             self.handle_existing()
 
     def handle_develop_mode(self):
         """
         Handles the Develop New Program mode
         """
-        from programengineergpt.utils.colors import Color
         from programengineergpt.utils.display import Display
         from programengineergpt.core.developer import Developer
         
@@ -116,6 +106,7 @@ class CLI(object):
             self : Argument
 
         """
+        from programengineergpt.agents.chatbot import ChatBot
         from programengineergpt.core.loader import CodeLoader
         
         repo_url = questionary.text(
@@ -124,106 +115,55 @@ class CLI(object):
             validate=URLValidator,
             style=custom_style,
         ).ask()
+
         loader = CodeLoader()
-        code_chunks = loader.load_online_repo(repo_url)
-        self.embed_new(code_chunks)
+        vector_store = loader.load_online_repo(repo_url)
+        chatbot = ChatBot(vector_store)
+        chatbot.interact()
 
     def handle_path(self):
         """
         Gets Code Directory Path and sends to loader
-
-        Args:
-            self : Argument
-
         """
+
+        from programengineergpt.agents.chatbot import ChatBot
         from programengineergpt.core.loader import CodeLoader
+
         dir_path = questionary.path(
             "Please provide the path to the code directory", only_directories=True, style=custom_style
         ).ask()
+
         loader = CodeLoader()
-        code_chunks = loader.load_directory(dir_path)
-        self.embed_new(code_chunks)
+        vector_store = loader.load_directory(dir_path)
+        chatbot = ChatBot(vector_store)
+        chatbot.interact()
 
     def handle_cwd(self):
         """
         Launches loader that handles current directory
-
-        Args:
-            self : Argument
-
         """
+        from programengineergpt.agents.chatbot import ChatBot
         from programengineergpt.core.loader import CodeLoader
         
         loader = CodeLoader()
-        code_chunks = loader.load_current_directory()
-        self.embed_new(code_chunks)
+        vector_store = loader.load_current_directory()
+        chatbot = ChatBot(vector_store)
+        chatbot.interact()
 
     def handle_existing(self):
         """
         Handles and loads existing code index from deeplake
-
-        Args:
-            self : Argument
-
         """
-        from programengineergpt.core.analyzer import AnalyzeCode
+        from programengineergpt.agents.chatbot import ChatBot
+        from programengineergpt.core.retriever import Retriever
 
-        deeplake_info = questionary.prompt(
-            [
-                {
-                    'type': 'text',
-                    'name': 'username',
-                    'message': "Please enter your DeepLake username: ",
-                },
-                {
-                    'type': 'text',
-                    'name': 'hub_name',
-                    'message': "Please enter the name of your DeepLake Index you'd like to load: ",
-                },
-            ],
-            style=custom_style,
-        )
-
-        username = deeplake_info['username']
-        hub_name = deeplake_info['hub_name']
-        analyzer = AnalyzeCode(username, hub_name)
-        analyzer.interact()
-
-    def embed_new(self, chunks):
-        """
-        Handles required parameters for creating a code index
-
-        Args:
-            self : Argument
-            chunks : Argument
-
-        """
-        from programengineergpt.core.embedder import CodeEmbedder
-        from programengineergpt.core.analyzer import AnalyzeCode
+        Color.print("\n{Y}Please enter collection name for code base: ")
+        col_name = input("Collection Name: ")
         
-        deeplake_info = questionary.prompt(
-            [
-                {
-                    'type': 'text',
-                    'name': 'username',
-                    'message': "Please enter your DeepLake username: ",
-                },
-                {
-                    'type': 'text',
-                    'name': 'hub_name',
-                    'message': "Please enter the name of your DeepLake Index you'd like to create: ",
-                },
-            ],
-            style=custom_style,
-        )
-
-        username = deeplake_info['username']
-        hub_name = deeplake_info['hub_name']
-
-        embed = CodeEmbedder(hub_name, username)
-        embed.embed_and_upload(chunks)
-        analyzer = AnalyzeCode(username, hub_name)
-        analyzer.interact()
+        index_retriever = Retriever(col_name)
+        vector_store = index_retriever.retrive_code_index()
+        chatbot = ChatBot(vector_store)
+        chatbot.interact()
 
 
 class URLValidator(Validator):

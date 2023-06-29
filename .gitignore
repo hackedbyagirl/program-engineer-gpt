@@ -29,3 +29,7 @@ MANIFEST
 
 ## ENV Variables
 *.env
+
+# Chroma
+*.chroma
+.chroma
