@@ -56,7 +56,7 @@ class CLI(object):
         Display.display_analyze_mode_description()
         method = questionary.rawselect(
             "Please select a method for how you would like to provide your code:",
-            choices=["URL", "Directory Path", "Current directory", "Local Index", "Back"],
+            choices=["URL", "Directory Path", "Current directory", "Back"],
             style=custom_style,
         ).ask()
 
@@ -73,8 +73,8 @@ class CLI(object):
         elif method == "Current directory":
             self.handle_cwd()
 
-        elif method == "Local Index":
-            self.handle_existing()
+        #elif method == "Local Index":
+        #    self.handle_existing()
 
     def handle_develop_mode(self):
         """
