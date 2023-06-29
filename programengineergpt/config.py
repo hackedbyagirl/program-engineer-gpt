@@ -33,8 +33,6 @@ class Config(object):
 
         # Environmental Variable
         cls.openai_key = None
-        cls.activeloop_key = None
-        cls.activeloop_username = None
 
         # Arguments
         cls.model = "gpt-3.5-turbo-16k"  # gpt-4 if you have the access
@@ -50,12 +48,8 @@ class Config(object):
 
     @classmethod
     def load_args(cls):
-        """Sets configuration values based on Argument.args object
+        """ Sets configuration values based on Argument.args object """
 
-        Args:
-            cls : Argument
-
-        """
         args = Arguments(cls).args
 
         # get arguments
@@ -67,31 +61,16 @@ class Config(object):
 
     @classmethod
     def load_env(cls):
-        """Gets Environmental Variables
-
-        Args:
-            cls : Argument
-
-        """
+        """Gets Environmental Variables"""
 
         # Get Environmental Variable
         load_dotenv()
-
         cls.openai_key = os.getenv("OPENAI_API_KEY")
-        cls.activeloop_key = os.getenv("ACTIVELOOP_TOKEN")
-        # cls.activeloop_username = os.getenv('DEEPLAKE_ACCOUNT_NAME')
+    
 
     @classmethod
     def exit(cls, code=0):
-        """
-        Exit Program
-
-        Args:
-            cls : Argument
-            code : Argument
-                (default is 0)
-
-        """
+        """ Exit Program """
         print("Stopping program")
 
         exit(code)
