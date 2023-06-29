@@ -72,36 +72,39 @@ class ChatBot:
     def next_step(self, messages):
         max_retry = 7
         retry = 0
-        try:
+        while True:
+            try:
 
-            response = self.openai_api.create(
-                model=self.model,
-                messages=messages,
-                stream=True,
-                temperature=self.temperature,
-            )
+                response = self.openai_api.create(
+                    model=self.model,
+                    messages=messages,
+                    stream=True,
+                    temperature=self.temperature,
+                )
 
-            chat = []
-            for chunk in response:
-                delta = chunk["choices"][0]["delta"]
-                msg = delta.get("content", "")
-                print(msg, end="")
-                chat.append(msg)
-            print()
+                Color.print("\n{B}Answer: \n")
+                chat = []
+                for chunk in response:
+                    delta = chunk["choices"][0]["delta"]
+                    msg = delta.get("content", "")
+                    print(msg, end="")
+                    chat.append(msg)
+                print()
 
-            self.chat_history.append({"role": "assistant", "content": "".join(chat)})
-        
-        except Exception as oops:
-                print(f'\n\nError communicating with OpenAI: "{oops}"')
-                if 'maximum context length' in str(oops):
-                    messages.pop(0)
-                    print('\n\n DEBUG: Trimming oldest message')
-                    continue
-                retry += 1
-                if retry >= max_retry:
-                    print(f"\n\nExiting due to excessive errors in API: {oops}")
-                    exit(1)
-                print(f'\n\nRetrying in {2 ** (retry - 1) * 5} seconds...')
-                sleep(2 ** (retry - 1) * 5)
+                self.chat_history.append({"role": "assistant", "content": "".join(chat)})
+                break
+            
+            except Exception as oops:
+                    print(f'\n\nError communicating with OpenAI: "{oops}"')
+                    if 'maximum context length' in str(oops):
+                        self.chat_history.pop(0)
+                        print('\n\n DEBUG: Trimming oldest message')
+                        continue
+                    retry += 1
+                    if retry >= max_retry:
+                        print(f"\n\nExiting due to excessive errors in API: {oops}")
+                        exit(1)
+                    print(f'\n\nRetrying in {2 ** (retry - 1) * 5} seconds...')
+                    sleep(2 ** (retry - 1) * 5)
     
 

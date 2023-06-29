@@ -7,7 +7,11 @@ from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
 from programengineergpt.utils.colors import Color
 
 class CodeLoader:
-    def __init__(self):
+    def __init__(self, col_name=None):
+        if col_name is None:
+            Color.print("\n{Y}Please enter collection name for code base: ")
+            col_name = input("Collection Name: ")
+
         self.embedding_function = OpenAIEmbeddingFunction()
         self.chromadb_client = chromadb.Client()
         self.code_collection = self.chromadb_client.create_collection(name='code_collection', embedding_function=self.embedding_function)

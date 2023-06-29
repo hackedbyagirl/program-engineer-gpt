@@ -1,18 +1,6 @@
 
+#
+
 def build_user_prompt(question, references):
-    context = []
-    for document, filename in references:
-        context.append(f"From file: {filename} Data: {document}\n")
-    prompt = {
-        'role': 'user', 
-        'content': f"""
-Context:
-{' '.join(context)}
-
-Assess the following context to answer the users question.
-
-Question:
-{question}
-"""
-    }
-    return [prompt]
+    context = "\n".join([f"From file: {ref[0]} Data: {ref[1]}" for ref in references])
+    return {"role": "user", "content": f"""Context:\n{context}\n\nAssess the following context to answer the users question.\n\nQuestion:\n{question}"""}

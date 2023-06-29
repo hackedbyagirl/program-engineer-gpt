@@ -29,3 +29,6 @@ MANIFEST
 
 ## ENV Variables
 *.env
+
+# Local DB
+*.chroma
