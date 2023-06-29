@@ -53,6 +53,20 @@ These instructions will get you a copy of the project up and running for develop
 ### Prerequisites
 - [OpenAI Account](https://openai.com/)
 
+### Known Issues
+ChromaDB Fails to Install on MacOS:
+
+```
+# Failed Command
+pip install chromadb
+```
+
+To address this issue, please run the following command:
+
+```
+export HNSWLIB_NO_NATIVE=1
+```
+
 ### Setup
 Instructions on how to get ProgramEngineerGPT configured locally.
 
