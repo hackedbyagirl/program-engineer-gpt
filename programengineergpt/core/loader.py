@@ -7,6 +7,7 @@ import fnmatch
 from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
 
 from programengineergpt.utils.colors import Color
+from programengineergpt.utils.file_processing import extensions_include, extensions_ignore, dirs_ignore
 
 
 class CodeLoader:
@@ -17,40 +18,10 @@ class CodeLoader:
         self.code_files = []
         self.files = []
         self.chunks = []
-        self.extensions = [
-            "bash",
-            "cfg",
-            "conf",
-            "cpp",
-            "cs",
-            "css",
-            "dockerignore",
-            "editorconfig",
-            "gitignore",
-            "go",
-            "html",
-            "htm",
-            "ini",
-            "java",
-            "javascript",
-            "json",
-            "js",
-            "markdown",
-            "md",
-            "php",
-            "py",
-            "rb",
-            "scala",
-            "scss",
-            "sh",
-            "sql",
-            "toml",
-            "txt",
-            "xml",
-            "yaml",
-            "yml",
-        ]
-
+        self.extensions = extensions_include
+        self.extensions_ignore = extensions_ignore
+        self.directories_ignore = dirs_ignore
+            
         Color.print("\n\n{G}Launching Code Loader...\n")
 
     def load_online_repo(self, url):
@@ -96,17 +67,14 @@ class CodeLoader:
         """
         Load all code files from the root directory.
         """
-        # Read .gitignore and create a list of ignore patterns
-        ignore_patterns = []
-        with open('../../.gitignore', 'r') as f:
-            ignore_patterns = [line.strip() for line in f if not line.startswith('#') and line.strip() != '']
-        # Gather files
         try:
             Color.print("{G}Step 2: {W}Loading Code for Indexing and Embedding")
             for dirpath, dirnames, filenames in os.walk(root_dir):
+                # Modifying dirnames list will update os.walk behavior
+                dirnames[:] = [d for d in dirnames if d not in self.directories_ignore]
                 for file in filenames:
-                     # Check if file matches any ignore pattern
-                    if any(fnmatch.fnmatch(file, pattern) for pattern in ignore_patterns):
+                    # Check if file matches any ignore pattern and skip loading
+                    if any(fnmatch.fnmatch(file, pattern) for pattern in self.extensions_ignore):
                         continue  # Skip this file
                         
                     if file.split(".")[-1] in self.extensions:
@@ -136,6 +104,7 @@ class CodeLoader:
             name=col_name, embedding_function=self.embedding_function
         )
 
+        counter = 0
         batch_size = 100
         for i in range(0, len(self.chunks), batch_size):
             batch = self.chunks[i : i + batch_size]
@@ -145,8 +114,11 @@ class CodeLoader:
             for full_path, chunks in batch:
                 for j, chunk in enumerate(chunks):
                     documents.append(chunk)
-                    ids.append(f"{full_path}_{j}")
+                    # Use the counter to create unique IDs
+                    ids.append(f"{full_path}_{counter}")
                     metadatas.append({"filename": full_path})
+                    # Increment the counter
+                    counter += 1
             code_collection.add(ids=ids, documents=documents, metadatas=metadatas)
 
         return code_collection
