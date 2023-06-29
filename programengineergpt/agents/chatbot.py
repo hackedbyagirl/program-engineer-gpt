@@ -1,6 +1,9 @@
 import chromadb
 from chromadb.config import Settings
+import datetime
+import json
 import openai
+import time
 
 from time import sleep
 
@@ -17,14 +20,16 @@ class ChatBot:
         self.chat_history = []
         self.model = "gpt-3.5-turbo-16k"
         self.temperature = 0.1
+        self.chat_file = f"chat_log_{time.time()}.json"
 
     def launch(self):
         # Display banner
         Display.display_interactive_chat_banner()
 
+        
         # Set initial system prompt
         self.chat_history.append({"role": "system", "content": SYSTEM_CHAT_PROMPT})
-
+       
         # Get First Question and context
         Color.print("\n{G}Question: ")
         question = input()
@@ -50,6 +55,7 @@ class ChatBot:
             Color.print("\n{G}Question: ")
             question = input()
             if question.lower() == "exit":
+                self.save_chat_log()
                 break
 
             # Build user prompt
@@ -93,9 +99,9 @@ class ChatBot:
                     chat.append(msg)
                 print()
 
-                self.chat_history.append(
-                    {"role": "assistant", "content": "".join(chat)}
-                )
+                chat_response = {"role": "assistant", "content": "".join(chat)}          
+                self.chat_history.append(chat_response)
+                
                 break
 
             except Exception as oops:
@@ -110,3 +116,7 @@ class ChatBot:
                     exit(1)
                 print(f"\n\nRetrying in {2 ** (retry - 1) * 5} seconds...")
                 sleep(2 ** (retry - 1) * 5)
+
+    def save_chat_log(self):
+        with open(self.chat_file, 'w') as f:
+            json.dump(self.chat_history, f)
