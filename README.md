@@ -51,7 +51,6 @@ In the 'Develop' mode, ProgramEngineerGPT can assist you in setting up a new cod
 These instructions will get you a copy of the project up and running for development and testing purposes.
 
 ### Prerequisites
-- [Deeplake Account](https://app.activeloop.ai/register/)
 - [OpenAI Account](https://openai.com/)
 
 ### Setup
@@ -66,28 +65,19 @@ Linux or MacOS
 ```bash
 # OpenAI API
 export OPENAI_API_KEY="<OPENAI_API_KEY>"
-
-# Deeplake API
-# Only Required for Analyze Mode
-export ACTIVELOOP_TOKEN="<ACTIVELOOP_API_KEY>"
-export DEEPLAKE_ACCOUNT_NAME="<DEEPLAKE_ACCOUNT_NAME>"
 ```
 Windows
 
 ```bash 
 # OpenAI API
 setx OPENAI_API_KEY <OPENAI_API_KEY>
-
-# Deeplake API
-setx ACTIVELOOP_TOKEN <ACTIVELOOP_API_KEY>
-setx DEEPLAKE_ACCOUNT_NAME <DEEPLAKE_ACCOUNT_NAME>
 ```
 
 Clone the repository
 ```bash
 #Download Repo and Navigate to Directory
-git clone https://github.com/hackedbyagirl/ProgramEngineerGPt.git
-cd ProgramEngineerGPT
+git clone https://github.com/hackedbyagirl/program-engineer-gpt.git
+cd program-engineer-gpt
 ```
 Install all the required packages
 ```
